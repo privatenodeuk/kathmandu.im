@@ -6,7 +6,7 @@ set -euo pipefail
 SERVER="root@46.62.205.109"
 REMOTE_PATH="/var/www/kathmandu.im"
 LOCAL_PATH="$(cd "$(dirname "$0")" && pwd)"
-SSH_KEY="$HOME/.ssh/prads2_id_rsa"
+SSH_KEY="$HOME/.ssh/id_ed25519"
 
 echo "Deploying kathmandu.im to twakka01..."
 echo "  Source : $LOCAL_PATH/"
