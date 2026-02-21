@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kathmandu.im — Hotels, Tours &amp; Travel in Nepal | Best Deals</title>
+    <meta name="description" content="Discover the best hotels, tours, transport and restaurants in Kathmandu and Nepal. Compare prices and book with confidence. Your complete Nepal travel directory.">
+    <meta name="keywords" content="Kathmandu hotels, Nepal tours, Nepal travel, Kathmandu accommodation, Nepal trekking, Nepal tour packages, budget hotels Kathmandu, luxury hotels Nepal, Nepal travel deals">
+    <meta name="author" content="kathmandu.im">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="https://kathmandu.im/">
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="https://kathmandu.im/">
+    <meta property="og:title"       content="Kathmandu.im — Hotels, Tours &amp; Travel in Nepal">
+    <meta property="og:description" content="Your complete Nepal travel directory. Find hotels, tours, transport and restaurants in Kathmandu and beyond.">
+    <meta property="og:site_name"   content="Kathmandu.im">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:title"       content="Kathmandu.im — Hotels, Tours &amp; Travel in Nepal">
+    <meta name="twitter:description" content="Find and book the best hotels, tours and travel deals in Nepal.">
+
+    <!-- Geo -->
+    <meta name="geo.region"    content="NP">
+    <meta name="geo.placename" content="Kathmandu">
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://tp.media">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebSite",
+                "@id": "https://kathmandu.im/#website",
+                "url": "https://kathmandu.im",
+                "name": "Kathmandu.im",
+                "description": "Nepal hotel and tourist directory — find and book hotels, tours, transport and restaurants."
+            },
+            {
+                "@type": "TouristDestination",
+                "name": "Kathmandu",
+                "description": "Capital city of Nepal and gateway to the Himalayas. Home to UNESCO World Heritage Sites, ancient temples, and the starting point for Everest and Annapurna treks.",
+                "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 27.7172,
+                    "longitude": 85.3240
+                },
+                "containedInPlace": {
+                    "@type": "Country",
+                    "name": "Nepal"
+                }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+
+<!-- ── Header ─────────────────────────────────────────────────────────────── -->
+<header class="site-header">
+    <div class="header-inner">
+        <a href="/" class="site-logo" aria-label="Kathmandu.im home">
+            Kathmandu<span>.im</span>
+        </a>
+        <nav class="site-nav" aria-label="Main navigation">
+            <a href="#hotels">Hotels</a>
+            <a href="#tours">Tours</a>
+            <a href="#categories">Directory</a>
+            <a href="#search">Search</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+<!-- ── Hero ───────────────────────────────────────────────────────────────── -->
+<section class="hero" aria-label="Discover Kathmandu">
+    <div class="hero-content">
+        <div class="hero-badge">Nepal Travel Directory</div>
+        <h1>Discover Kathmandu<br>Hotels, Tours &amp; Travel Deals</h1>
+        <p>Your complete guide to accommodation, tours, transport and restaurants across Nepal — with the best prices from trusted booking partners.</p>
+        <div class="hero-actions">
+            <a href="#search" class="btn btn-white">Search Hotels &amp; Flights</a>
+            <a href="#tours"  class="btn btn-outline">Explore Tours</a>
+        </div>
+    </div>
+</section>
+
+<!-- ── Stats strip ─────────────────────────────────────────────────────────── -->
+<div class="stats-strip" aria-label="Directory highlights">
+    <div class="stats-grid">
+        <div>
+            <div class="stat-num">500+</div>
+            <div class="stat-lbl">Listed Hotels</div>
+        </div>
+        <div>
+            <div class="stat-num">120+</div>
+            <div class="stat-lbl">Tour Packages</div>
+        </div>
+        <div>
+            <div class="stat-num">8</div>
+            <div class="stat-lbl">Regions Covered</div>
+        </div>
+        <div>
+            <div class="stat-num">24/7</div>
+            <div class="stat-lbl">Booking Support</div>
+        </div>
+    </div>
+</div>
+
+<!-- ── Search widgets ──────────────────────────────────────────────────────── -->
+<section id="search" class="section widget-section" aria-label="Search hotels and flights">
+    <div class="container">
+        <div class="section-label">Search &amp; Book</div>
+        <h2 class="section-title">Find the Best Deals in Nepal</h2>
+        <p class="section-sub">Compare hotels and flights from hundreds of providers in seconds.</p>
+
+        <div class="widget-tabs" role="tablist" aria-label="Search type">
+            <button class="tab-btn active" data-tab="hotels" role="tab" aria-selected="true">
+                🏨 Hotels
+            </button>
+            <button class="tab-btn" data-tab="flights" role="tab" aria-selected="false">
+                ✈️ Flights
+            </button>
+        </div>
+
+        <!-- Hotel search widget -->
+        <div id="widget-hotels" class="widget-embed" role="tabpanel">
+            <div class="widget-box" id="tp-hotel-widget">
+                <!-- TravelPayouts hotel search widget loads here via main.js -->
+                <div>
+                    <p style="font-weight:600;margin-bottom:.5rem;">Hotel Search Loading…</p>
+                    <p>Add your TravelPayouts marker ID in <code>js/main.js</code> to activate.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flight search widget -->
+        <div id="widget-flights" class="widget-embed" style="display:none;" role="tabpanel">
+            <div class="widget-box" id="tp-flight-widget">
+                <!-- TravelPayouts flight search widget loads here via main.js -->
+                <div>
+                    <p style="font-weight:600;margin-bottom:.5rem;">Flight Search Loading…</p>
+                    <p>Add your TravelPayouts marker ID in <code>js/main.js</code> to activate.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Category cards ──────────────────────────────────────────────────────── -->
+<section id="categories" class="section categories-section" aria-label="Directory categories">
+    <div class="container">
+        <div class="section-label">Browse by Category</div>
+        <h2 class="section-title">Everything You Need in Nepal</h2>
+
+        <div class="cards-grid">
+
+            <article class="category-card">
+                <div class="card-icon red">🏨</div>
+                <h3 class="card-title">Hotels &amp; Stays</h3>
+                <p class="card-desc">From budget guesthouses to luxury resorts — all price ranges and locations across Nepal.</p>
+                <div class="card-count">500+ listings</div>
+            </article>
+
+            <article class="category-card">
+                <div class="card-icon blue">🏔️</div>
+                <h3 class="card-title">Tours &amp; Treks</h3>
+                <p class="card-desc">Everest Base Camp, Annapurna Circuit, Langtang, jungle safaris and cultural day tours.</p>
+                <div class="card-count">120+ packages</div>
+            </article>
+
+            <article class="category-card">
+                <div class="card-icon gold">🚌</div>
+                <h3 class="card-title">Transport</h3>
+                <p class="card-desc">Airport transfers, tourist buses, private cars and helicopter charters across Nepal.</p>
+                <div class="card-count">80+ options</div>
+            </article>
+
+            <article class="category-card">
+                <div class="card-icon green">🍽️</div>
+                <h3 class="card-title">Restaurants</h3>
+                <p class="card-desc">Dal bhat, momo, rooftop cafes and international dining in Thamel and beyond.</p>
+                <div class="card-count">200+ venues</div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── Featured hotels ─────────────────────────────────────────────────────── -->
+<section id="hotels" class="section hotels-section" aria-label="Featured hotels">
+    <div class="container">
+        <div class="section-label">Accommodation</div>
+        <h2 class="section-title">Featured Hotels in Kathmandu</h2>
+        <p class="section-sub">Curated picks across all budgets — book via our partners for best-price guarantee.</p>
+
+        <div class="hotels-grid">
+
+            <article class="hotel-card">
+                <div class="hotel-img" aria-hidden="true">🏯</div>
+                <div class="hotel-body">
+                    <div class="hotel-stars" aria-label="5 stars">★★★★★</div>
+                    <h3 class="hotel-name">Dwarika's Hotel</h3>
+                    <p class="hotel-area">Battisputali, Kathmandu</p>
+                    <p class="hotel-price">From <strong>$180</strong>/night · Heritage luxury</p>
+                    <a href="#search" class="hotel-cta" rel="sponsored">Check Availability →</a>
+                </div>
+            </article>
+
+            <article class="hotel-card">
+                <div class="hotel-img" aria-hidden="true">🏢</div>
+                <div class="hotel-body">
+                    <div class="hotel-stars" aria-label="4 stars">★★★★</div>
+                    <h3 class="hotel-name">Hotel Yak &amp; Yeti</h3>
+                    <p class="hotel-area">Durbar Marg, Kathmandu</p>
+                    <p class="hotel-price">From <strong>$95</strong>/night · Business hotel</p>
+                    <a href="#search" class="hotel-cta" rel="sponsored">Check Availability →</a>
+                </div>
+            </article>
+
+            <article class="hotel-card">
+                <div class="hotel-img" aria-hidden="true">🌿</div>
+                <div class="hotel-body">
+                    <div class="hotel-stars" aria-label="3 stars">★★★</div>
+                    <h3 class="hotel-name">Thamel Eco Resort</h3>
+                    <p class="hotel-area">Thamel, Kathmandu</p>
+                    <p class="hotel-price">From <strong>$35</strong>/night · Eco-friendly</p>
+                    <a href="#search" class="hotel-cta" rel="sponsored">Check Availability →</a>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── Popular tours ───────────────────────────────────────────────────────── -->
+<section id="tours" class="section tours-section" aria-label="Popular tours and treks">
+    <div class="container">
+        <div class="section-label">Tours &amp; Treks</div>
+        <h2 class="section-title">Most Popular Nepal Experiences</h2>
+        <p class="section-sub">Handpicked adventures — from half-day city tours to 21-day Himalayan expeditions.</p>
+
+        <div class="tours-list">
+
+            <div class="tour-item">
+                <div class="tour-info">
+                    <div class="tour-emoji" aria-hidden="true">⛺</div>
+                    <div>
+                        <div class="tour-name">Everest Base Camp Trek</div>
+                        <div class="tour-meta">14 days · Lukla to EBC · Grade: Challenging</div>
+                    </div>
+                </div>
+                <div class="tour-price">
+                    <strong>From $1,200</strong>
+                    <span>per person</span>
+                </div>
+            </div>
+
+            <div class="tour-item">
+                <div class="tour-info">
+                    <div class="tour-emoji" aria-hidden="true">🏔️</div>
+                    <div>
+                        <div class="tour-name">Annapurna Circuit</div>
+                        <div class="tour-meta">18 days · Full circuit · Grade: Moderate–Hard</div>
+                    </div>
+                </div>
+                <div class="tour-price">
+                    <strong>From $1,100</strong>
+                    <span>per person</span>
+                </div>
+            </div>
+
+            <div class="tour-item">
+                <div class="tour-info">
+                    <div class="tour-emoji" aria-hidden="true">🐘</div>
+                    <div>
+                        <div class="tour-name">Chitwan Jungle Safari</div>
+                        <div class="tour-meta">3 days · Chitwan National Park · Grade: Easy</div>
+                    </div>
+                </div>
+                <div class="tour-price">
+                    <strong>From $280</strong>
+                    <span>per person</span>
+                </div>
+            </div>
+
+            <div class="tour-item">
+                <div class="tour-info">
+                    <div class="tour-emoji" aria-hidden="true">🏛️</div>
+                    <div>
+                        <div class="tour-name">Kathmandu Heritage Day Tour</div>
+                        <div class="tour-meta">1 day · 7 UNESCO sites · Grade: Easy</div>
+                    </div>
+                </div>
+                <div class="tour-price">
+                    <strong>From $55</strong>
+                    <span>per person</span>
+                </div>
+            </div>
+
+            <div class="tour-item">
+                <div class="tour-info">
+                    <div class="tour-emoji" aria-hidden="true">🚁</div>
+                    <div>
+                        <div class="tour-name">Everest Mountain Flight</div>
+                        <div class="tour-meta">1 hour · Sunrise flight · No trekking required</div>
+                    </div>
+                </div>
+                <div class="tour-price">
+                    <strong>From $190</strong>
+                    <span>per person</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── Trust strip ─────────────────────────────────────────────────────────── -->
+<div class="trust-section" aria-label="Why book with us">
+    <h2>Why Book Through Kathmandu.im?</h2>
+    <p>We partner with leading travel providers to bring you verified listings, real prices, and genuine reviews — all in one place.</p>
+    <div class="trust-badges">
+        <span class="trust-badge">Best Price Promise</span>
+        <span class="trust-badge">Verified Listings</span>
+        <span class="trust-badge">24/7 Support</span>
+        <span class="trust-badge">Secure Booking</span>
+        <span class="trust-badge">Instant Confirmation</span>
+    </div>
+</div>
+
+</main>
+
+<!-- ── Footer ──────────────────────────────────────────────────────────────── -->
+<footer class="site-footer" aria-label="Site footer">
+
+    <div class="affiliate-notice">
+        <strong>Affiliate Disclosure:</strong> Kathmandu.im participates in the TravelPayouts affiliate programme and other travel affiliate networks. When you click booking links on this site and complete a purchase, we may earn a commission at no extra cost to you. This helps us maintain and improve the directory.
+    </div>
+
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <div class="logo">Kathmandu.im</div>
+            <p>Your complete hotel &amp; tourist directory for Nepal. Independent, unbiased, affiliate-supported.</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Directory</h4>
+            <ul>
+                <li><a href="#hotels">Hotels &amp; Stays</a></li>
+                <li><a href="#tours">Tours &amp; Treks</a></li>
+                <li><a href="#categories">Transport</a></li>
+                <li><a href="#categories">Restaurants</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Destinations</h4>
+            <ul>
+                <li><a href="#">Kathmandu</a></li>
+                <li><a href="#">Pokhara</a></li>
+                <li><a href="#">Chitwan</a></li>
+                <li><a href="#">Lumbini</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Information</h4>
+            <ul>
+                <li><a href="#">Nepal Visa Guide</a></li>
+                <li><a href="#">Best Time to Visit</a></li>
+                <li><a href="#">Trekking Permits</a></li>
+                <li><a href="#">Travel Insurance</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <span>&copy; 2026 Kathmandu.im · All rights reserved.</span>
+        <span>Built with care for Nepal travellers.</span>
+    </div>
+</footer>
+
+<script src="/js/main.js"></script>
+</body>
+</html>
