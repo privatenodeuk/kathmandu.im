@@ -113,15 +113,6 @@ export function SearchBar() {
     if (e.key === "Enter" && active >= 0) { window.location.href = allResults[active].href; closeSearch(); }
   };
 
-  const CATEGORIES = [
-    { label: "Hotels", href: "/hotels", icon: "🏨" },
-    { label: "Temples", href: "/attractions", icon: "🛕" },
-    { label: "Museums", href: "/attractions", icon: "🏛️" },
-    { label: "Bars", href: "/attractions", icon: "🍸" },
-    { label: "Nature", href: "/attractions", icon: "🌿" },
-    { label: "UNESCO Sites", href: "/tags/unesco-heritage", icon: "⭐" },
-  ];
-
   return (
     <>
       {/* Search icon button in nav */}
@@ -266,34 +257,12 @@ export function SearchBar() {
               </div>
             )}
 
-            {/* Category shortcuts — shown when query is empty */}
+            {/* Empty state hint */}
             {query.length < 2 && (
-              <div style={{ padding: "16px 20px 20px" }}>
-                <div style={{ fontSize: "0.68rem", fontWeight: 700, color: "var(--muted)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 12 }}>Browse Categories</div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                  {CATEGORIES.map((c) => (
-                    <a
-                      key={c.label}
-                      href={c.href}
-                      onClick={closeSearch}
-                      style={{
-                        display: "flex", alignItems: "center", gap: 6,
-                        padding: "8px 14px", borderRadius: 20,
-                        border: "1px solid var(--border)", background: "var(--bg)",
-                        textDecoration: "none", color: "var(--text)",
-                        fontSize: "0.82rem", fontWeight: 500,
-                        transition: "border-color 0.15s, background 0.15s",
-                      }}
-                      onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--accent)"; (e.currentTarget as HTMLAnchorElement).style.background = "#C8794110"; }}
-                      onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.borderColor = "var(--border)"; (e.currentTarget as HTMLAnchorElement).style.background = "var(--bg)"; }}
-                    >
-                      <span>{c.icon}</span>
-                      <span>{c.label}</span>
-                    </a>
-                  ))}
-                </div>
-                <div style={{ marginTop: 16, padding: "10px 14px", background: "var(--bg)", borderRadius: 8, fontSize: "0.78rem", color: "var(--muted)" }}>
-                  Try: <span style={{ color: "var(--accent)", cursor: "pointer" }} onClick={() => { setQuery("boudhanath"); search("boudhanath"); }}>Boudhanath</span>
+              <div style={{ padding: "20px 20px 24px" }}>
+                <div style={{ fontSize: "0.78rem", color: "var(--muted)" }}>
+                  Try:{" "}
+                  <span style={{ color: "var(--accent)", cursor: "pointer" }} onClick={() => { setQuery("boudhanath"); search("boudhanath"); }}>Boudhanath</span>
                   {" · "}
                   <span style={{ color: "var(--accent)", cursor: "pointer" }} onClick={() => { setQuery("luxury"); search("luxury"); }}>luxury</span>
                   {" · "}

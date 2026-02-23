@@ -1,0 +1,45 @@
+# Production standalone compose — twakka01 (46.62.205.109)
+# Use: docker compose -f docker-compose.prod.yml up -d
+# Apache proxies kathmandu.im → localhost:3002
+
+services:
+  app:
+    image: kathmanduim-app:latest
+    build:
+      context: .
+      target: production
+    ports:
+      - "3002:3000"
+    environment:
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD}@db:5432/kathmandu
+      DIRECT_URL: postgresql://postgres:${POSTGRES_PASSWORD}@db:5432/kathmandu
+      NODE_ENV: production
+      NEXT_PUBLIC_SITE_URL: https://kathmandu.im
+      NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${GOOGLE_MAPS_API_KEY:-}
+      TRAVELPAYOUTS_MARKER: ${TRAVELPAYOUTS_MARKER:-}
+      BOOKING_AFFILIATE_ID: ${BOOKING_AFFILIATE_ID:-}
+      GOOGLE_AI_KEY: ${GOOGLE_AI_KEY:-}
+    volumes:
+      - ./public/images:/app/public/images  # persist generated sketches across deploys
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: kathmandu
+    volumes:
+      - kathmandu_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  kathmandu_pgdata:

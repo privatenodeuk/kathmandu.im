@@ -35,7 +35,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="nav__links">
               <a href="/hotels">Hotels</a>
               <a href="/attractions">Attractions</a>
-              <a href="/nightlife">Nightlife</a>
               <NavMore />
               <SearchBar />
             </div>

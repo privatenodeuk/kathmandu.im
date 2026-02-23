@@ -9,7 +9,6 @@ const CATEGORIES = [
   { label: "UNESCO Sites", href: "/tags/unesco-heritage", icon: "⭐", desc: "World Heritage" },
   { label: "Spiritual", href: "/tags/spiritual", icon: "🙏", desc: "Temples & monasteries" },
   { label: "Luxury", href: "/tags/luxury", icon: "✨", desc: "Premium experiences" },
-  { label: "Free Entry", href: "/tags/budget-friendly", icon: "🎟️", desc: "No admission cost" },
   { label: "Photography", href: "/tags/photography", icon: "📷", desc: "Best photo spots" },
 ];
 

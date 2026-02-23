@@ -1787,11 +1787,691 @@ Park Village suits travellers who want the convenience of a Thamel location with
 ];
 
 // ─────────────────────────────────────────────
+// FOUR-STAR ADDITIONS
+// ─────────────────────────────────────────────
+
+const fourStarAdditions = [
+  {
+    slug: "aloft-kathmandu-thamel",
+    name: "Aloft Kathmandu Thamel",
+    areaSlug: "thamel",
+    stars: 4,
+    priceFromUsd: 120,
+    priceTier: "UPSCALE" as PriceTier,
+    brandChain: "Marriott International",
+    tagline: "Modern Marriott design in the heart of Thamel",
+    descriptionShort:
+      "Aloft Kathmandu is the most contemporary four-star hotel in Thamel — a Marriott brand property with sharp modern design, rooftop pool, reliable Wi-Fi and the consistent service standards of an international chain.",
+    description: `Aloft Kathmandu Thamel is the newest and most design-forward four-star hotel in central Kathmandu. Opened in 2019 as part of Marriott International's Aloft brand — aimed at younger, tech-savvy travellers who want reliable modern standards without the formality of a full-service luxury property — it brings a design aesthetic and operational consistency that is genuinely different from Kathmandu's heritage hotel tradition.
+
+The hotel's 200+ rooms are done in Aloft's characteristic style: bold graphics, bright colours, USB charging points everywhere, rain showers and walk-in closets as standard. The Wi-Fi is the fastest and most reliable in any Kathmandu hotel we tested — a practical consideration for those working while travelling. The ground-floor WXYZ Bar is a sociable space with a DJ on weekend evenings; the rooftop pool has views north toward the Shivapuri hills.
+
+The Thamel location puts guests within five minutes' walk of the best restaurants, trekking agencies and gear shops in the city. This is a hotel for people who want the Thamel location and the convenience of an international chain behind them: consistent room quality, 24-hour room service, Marriott Bonvoy points, and staff who speak excellent English.
+
+It is not a heritage experience. If you want carved wood, palace history and garden courtyards, choose Hotel Shanker, Kantipur Temple House or Baber Mahal Vilas. If you want reliable modernity in the right location, Aloft delivers it.`,
+    coverImageUrl: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
+    latitude: 27.7155,
+    longitude: 85.3116,
+    totalRooms: 208,
+    yearBuilt: 2019,
+    ourScore: 8.2,
+    websiteUrl: "https://www.marriott.com/hotels/travel/ktmal-aloft-kathmandu-thamel",
+    rooms: [
+      {
+        name: "Aloft Room",
+        description: "Standard Aloft room with bold design, king or twin beds, rain shower and Bliss spa amenities. City or courtyard views.",
+        maxOccupancy: 2,
+        bedType: "King or Twin",
+        sizeM2: 28,
+        priceFromUsd: 120,
+      },
+      {
+        name: "Urb Loft Room",
+        description: "Larger corner rooms with expanded views, separate living area and upgraded bath products.",
+        maxOccupancy: 2,
+        bedType: "King",
+        sizeM2: 38,
+        priceFromUsd: 155,
+      },
+      {
+        name: "Suite",
+        description: "Full suite with separate bedroom and lounge, kitchenette and Marriott Bonvoy turn-down service.",
+        maxOccupancy: 3,
+        bedType: "King",
+        sizeM2: 65,
+        priceFromUsd: 220,
+      },
+    ],
+    amenitySlugs: [
+      "wifi-free","24h-reception","restaurant","bar","swimming-pool","gym",
+      "tour-desk","airport-transfer","laundry","currency-exchange","room-service",
+      "business-centre",
+    ],
+    tagSlugs: ["solo-traveller","couple","business-traveller","local-favourite"],
+    policy: {
+      checkinFrom: "15:00",
+      checkinUntil: "23:59",
+      checkoutFrom: "06:00",
+      checkoutUntil: "12:00",
+      cancellationHours: 48,
+      cancellationPolicy: "Free cancellation up to 48 hours before arrival.",
+      prepaymentRequired: false,
+      petsAllowed: false,
+      breakfastIncluded: false,
+      parkingAvailable: true,
+      parkingPriceUsd: 0,
+      languagesSpoken: ["en", "ne", "hi"],
+      currenciesAccepted: ["USD", "NPR", "EUR"],
+    },
+    faqs: [
+      {
+        question: "Is Aloft Kathmandu worth it over Heritage hotels?",
+        answer: "Depends on priorities. Aloft wins on: consistent room quality, fast Wi-Fi, modern bathrooms, rooftop pool, international brand reliability. Heritage hotels (Shanker, Kantipur Temple House) win on: architectural character, gardens, atmosphere. Both are similar prices.",
+      },
+      {
+        question: "Does Aloft Kathmandu have a pool?",
+        answer: "Yes — a rooftop pool with views toward the Shivapuri hills. It is open during daylight hours and is one of the best hotel pool settings in Thamel.",
+      },
+      {
+        question: "Is Aloft Kathmandu good for business travel?",
+        answer: "Yes — arguably the best hotel in Thamel for business travellers. Reliable Wi-Fi throughout, a business centre, meeting rooms available, and the consistent service standards of a Marriott brand property.",
+      },
+    ],
+  },
+
+  {
+    slug: "malla-hotel",
+    name: "Malla Hotel",
+    areaSlug: "lazimpat",
+    stars: 4,
+    priceFromUsd: 95,
+    priceTier: "UPSCALE" as PriceTier,
+    tagline: "Kathmandu's classic Lazimpat hotel with pool and gardens",
+    descriptionShort:
+      "The Malla Hotel has been one of Kathmandu's most reliable four-star addresses since 1971 — a 119-room property with a genuine swimming pool, pleasant gardens and a central Lazimpat location near the embassy district.",
+    description: `The Malla Hotel has been part of Kathmandu's hotel landscape since 1971, predating most of its current competitors. Named after the Malla kings who built much of the Kathmandu Valley's medieval architecture, it sits in the heart of Lazimpat — the city's embassy district — in a quiet position that is simultaneously close to Thamel (10 minutes on foot) and removed from its bustle.
+
+The hotel's 119 rooms span two wings: the original building and a garden wing added in the 1980s. Both are well-maintained and decorated in a style that is comfortable international rather than ambitious — the Malla has never tried to compete on design with the heritage boutiques, focusing instead on reliable service, good food and a consistently pleasant experience.
+
+The outdoor swimming pool, set in the manicured hotel garden, is one of Kathmandu's better hotel pools — larger and better maintained than many equivalents in the price range. The garden also contains a pleasant al fresco breakfast area that comes into its own in the October–April season.
+
+The Malla's strengths are consistency and value: over five decades it has refined the four-star formula for Kathmandu — reliable rooms, good breakfast, attentive staff, excellent garden setting — without overreaching. Repeat visitors often cite the staff as the hotel's greatest asset.`,
+    coverImageUrl: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80",
+    latitude: 27.7195,
+    longitude: 85.3175,
+    totalRooms: 119,
+    yearBuilt: 1971,
+    yearRenovated: 2015,
+    ourScore: 8.1,
+    websiteUrl: "https://www.mallahotel.com.np",
+    rooms: [
+      {
+        name: "Standard Room",
+        description: "Comfortable rooms with garden or city views, traditional Nepali textile accents and en-suite bathroom.",
+        maxOccupancy: 2,
+        bedType: "Double or Twin",
+        sizeM2: 26,
+        priceFromUsd: 95,
+      },
+      {
+        name: "Deluxe Room",
+        description: "Larger rooms in the garden wing with pool views and upgraded furnishings. Quieter than road-facing rooms.",
+        maxOccupancy: 2,
+        bedType: "King",
+        sizeM2: 34,
+        priceFromUsd: 120,
+      },
+      {
+        name: "Suite",
+        description: "Spacious suites with separate sitting room, panoramic views and Malla's signature hospitality package.",
+        maxOccupancy: 3,
+        bedType: "King",
+        sizeM2: 58,
+        priceFromUsd: 185,
+      },
+    ],
+    amenitySlugs: [
+      "wifi-free","24h-reception","restaurant","bar","swimming-pool","gym",
+      "tour-desk","trekking-info","airport-transfer","laundry","garden",
+      "currency-exchange",
+    ],
+    tagSlugs: ["couple","family","solo-traveller","quiet-and-peaceful","local-favourite"],
+    policy: {
+      checkinFrom: "14:00",
+      checkinUntil: "23:59",
+      checkoutFrom: "06:00",
+      checkoutUntil: "12:00",
+      cancellationHours: 24,
+      cancellationPolicy: "Free cancellation up to 24 hours before arrival.",
+      prepaymentRequired: false,
+      petsAllowed: false,
+      breakfastIncluded: true,
+      parkingAvailable: true,
+      parkingPriceUsd: 0,
+      languagesSpoken: ["en", "ne"],
+      currenciesAccepted: ["USD", "NPR"],
+    },
+    faqs: [
+      {
+        question: "How far is Malla Hotel from Thamel?",
+        answer: "About 1.2 km south-west of Thamel's main gate — a 10–15 minute walk or NPR 150 tuk-tuk ride. The Lazimpat location is quieter than Thamel but convenient for the area's restaurants and cafes.",
+      },
+      {
+        question: "Does Malla Hotel have a pool?",
+        answer: "Yes — one of Kathmandu's better hotel outdoor pools, set in the hotel gardens. Open seasonally (March–October is optimal). Heated in winter months.",
+      },
+      {
+        question: "Is breakfast included at Malla Hotel?",
+        answer: "Yes — buffet breakfast is included in the room rate. The breakfast quality is consistently praised by guests, with a good selection of continental and Nepali options.",
+      },
+    ],
+  },
+];
+
+// ─────────────────────────────────────────────
+// THREE-STAR HOTELS
+// ─────────────────────────────────────────────
+
+const threeStarHotels = [
+  {
+    slug: "alobar1000",
+    name: "Alobar1000",
+    areaSlug: "thamel",
+    stars: 3,
+    priceFromUsd: 35,
+    priceTier: "MID_RANGE" as PriceTier,
+    tagline: "Kathmandu's most celebrated boutique hostel — design, community, location",
+    descriptionShort:
+      "Alobar1000 is consistently rated one of the best hostels in Asia — a design-forward boutique property in Paknajol with private rooms, a rooftop terrace café, daily events and the best social scene in Kathmandu.",
+    description: `Alobar1000 occupies a category of its own in Kathmandu's accommodation market. It is technically a hostel — it has dormitory beds from $10/night — but it operates more like a boutique hotel with a community dimension: private rooms with design touches that outperform the three-star category, a rooftop café-bar that serves excellent food, daily cultural events (cooking classes, Nepali language lessons, textile workshops) and a social atmosphere that makes solo travel feel like a festival.
+
+The property is located in Paknajol, a quieter residential lane 10 minutes' walk from Thamel's centre — close enough to access the trekking agencies and restaurants but removed enough to feel human-scale rather than chaotic. The building is a restored Newari townhouse with contemporary interventions: exposed brick walls, pendant lighting, a librarylounge with an excellent collection of Nepal-focused books.
+
+The private rooms — around 40 in various configurations — are well-designed and comfortable by three-star standards, with the added benefit of the property's social infrastructure. Single travellers particularly value the organised social activities, which make meeting people easy without the effort required in conventional hotels.
+
+Alobar1000 won "Best Hostel in South Asia" at the Hostelworld awards multiple times and has maintained its reputation across a decade of operation. It remains the best budget-to-mid option in Kathmandu for any traveller who values community alongside comfort.`,
+    coverImageUrl: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&w=1200&q=80",
+    latitude: 27.7180,
+    longitude: 85.3100,
+    totalRooms: 42,
+    yearBuilt: 2013,
+    ourScore: 8.6,
+    websiteUrl: "https://www.alobar1000.com",
+    rooms: [
+      {
+        name: "Dormitory Bed",
+        description: "Mixed and female-only dorms in 6–10 bed configurations. Individual curtained pods, personal light and USB charging, secure lockers.",
+        maxOccupancy: 1,
+        bedType: "Single",
+        sizeM2: 6,
+        priceFromUsd: 10,
+      },
+      {
+        name: "Private Room",
+        description: "Thoughtfully designed private rooms with exposed brick, quality linens and en-suite bathroom. Various configurations including twin and double.",
+        maxOccupancy: 2,
+        bedType: "Double or Twin",
+        sizeM2: 18,
+        priceFromUsd: 35,
+      },
+      {
+        name: "Deluxe Private",
+        description: "Larger private rooms with Newari architectural detailing, superior linens and mountain or garden views.",
+        maxOccupancy: 2,
+        bedType: "King",
+        sizeM2: 26,
+        priceFromUsd: 55,
+      },
+    ],
+    amenitySlugs: [
+      "wifi-free","24h-reception","restaurant","bar","tour-desk","trekking-info",
+      "laundry","rooftop-terrace","garden","luggage-storage",
+    ],
+    tagSlugs: ["backpacker","solo-traveller","social","budget-friendly","off-the-beaten-path"],
+    policy: {
+      checkinFrom: "14:00",
+      checkinUntil: "23:59",
+      checkoutFrom: "08:00",
+      checkoutUntil: "11:00",
+      cancellationHours: 24,
+      cancellationPolicy: "Free cancellation up to 24 hours before arrival.",
+      prepaymentRequired: false,
+      petsAllowed: false,
+      breakfastIncluded: false,
+      parkingAvailable: false,
+      languagesSpoken: ["en", "ne"],
+      currenciesAccepted: ["USD", "NPR"],
+    },
+    faqs: [
+      {
+        question: "Is Alobar1000 good for solo travellers?",
+        answer: "It is arguably the single best accommodation option in Kathmandu for solo travellers. The daily events, communal spaces, and the general social design of the property make meeting people effortless. The quality of the social scene is exceptional even by global hostel standards.",
+      },
+      {
+        question: "What events does Alobar1000 organise?",
+        answer: "Daily events include Nepali cooking classes, language lessons, traditional textile workshops, guided city walks, and regular movie nights and live music. The event calendar changes seasonally — check their website or social media for current programming.",
+      },
+      {
+        question: "Are the private rooms at Alobar1000 good value?",
+        answer: "Yes — among the best value private rooms in Kathmandu at $35–55/night. The design quality outperforms the price, and guests access the same social infrastructure (events, rooftop café, communal lounge) as dormitory guests.",
+      },
+      {
+        question: "Where exactly is Alobar1000?",
+        answer: "In Paknajol, a quiet lane about 10 minutes' walk from central Thamel. The address is easily found on Google Maps. The lane setting is pleasant — fewer motorbikes, more neighbourhood feel — while remaining very close to Thamel's amenities.",
+      },
+    ],
+  },
+
+  {
+    slug: "manang-hotel",
+    name: "Manang Hotel",
+    areaSlug: "thamel",
+    stars: 3,
+    priceFromUsd: 45,
+    priceTier: "MID_RANGE" as PriceTier,
+    tagline: "Reliable three-star value in central Thamel",
+    descriptionShort:
+      "Manang Hotel is one of Thamel's most consistently reviewed mid-range options — a well-run 50-room property with comfortable rooms, good breakfast, rooftop terrace and helpful staff at honest three-star prices.",
+    description: `Manang Hotel sits on a relatively quiet lane in the heart of Thamel, positioned to give guests easy walking access to the district's trekking agencies, restaurants and gear shops while keeping street noise manageable. It has operated since the early 2000s and built a loyal following through simple virtues: clean, comfortable rooms; a reliable breakfast; and staff who know how to help trekkers and travellers organise the practical side of a Nepal trip.
+
+The 50 rooms are decorated simply but maintained well — dark wood furniture, Nepali textile accents, reliable hot showers, and windows looking either onto the lane or a small interior courtyard. The upper floors have better natural light and the quietest rooms. The rooftop terrace provides a sociable space for breakfast and evening drinks with views over the Thamel roofscape.
+
+The hotel's staff are particularly strong on practical assistance: booking domestic flights, arranging Everest Base Camp trek permits, recommending reliable guides, and helping with onward bus connections to Pokhara or Chitwan. This knowledge of logistics is a valuable commodity in a city where the options are overwhelming and the quality variable.
+
+Manang Hotel is not an ambitious property. It is a well-run, honest three-star that does exactly what three-star travellers need in Kathmandu: clean rooms, good breakfast, and staff who actually help.`,
+    coverImageUrl: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
+    latitude: 27.7158,
+    longitude: 85.3122,
+    totalRooms: 50,
+    yearBuilt: 2003,
+    ourScore: 7.8,
+    websiteUrl: "https://www.mananghotel.com",
+    rooms: [
+      {
+        name: "Standard Room",
+        description: "Clean, comfortable rooms with en-suite bathroom, hot shower and basic amenities. Lane or courtyard views.",
+        maxOccupancy: 2,
+        bedType: "Double or Twin",
+        sizeM2: 20,
+        priceFromUsd: 45,
+      },
+      {
+        name: "Deluxe Room",
+        description: "Slightly larger rooms on upper floors with better natural light and city views from the window bench.",
+        maxOccupancy: 2,
+        bedType: "King or Twin",
+        sizeM2: 26,
+        priceFromUsd: 65,
+      },
+      {
+        name: "Family Room",
+        description: "Connected rooms or triple configuration for families, with cot available on request.",
+        maxOccupancy: 4,
+        bedType: "Mixed",
+        sizeM2: 38,
+        priceFromUsd: 85,
+      },
+    ],
+    amenitySlugs: [
+      "wifi-free","24h-reception","restaurant","tour-desk","trekking-info",
+      "airport-transfer","laundry","currency-exchange","rooftop-terrace","luggage-storage",
+    ],
+    tagSlugs: ["backpacker","solo-traveller","family","trekking","budget-friendly"],
+    policy: {
+      checkinFrom: "12:00",
+      checkinUntil: "23:59",
+      checkoutFrom: "06:00",
+      checkoutUntil: "12:00",
+      cancellationHours: 24,
+      cancellationPolicy: "Free cancellation up to 24 hours before arrival.",
+      prepaymentRequired: false,
+      petsAllowed: false,
+      breakfastIncluded: true,
+      parkingAvailable: false,
+      languagesSpoken: ["en", "ne"],
+      currenciesAccepted: ["USD", "NPR"],
+    },
+    faqs: [
+      {
+        question: "Is Manang Hotel good for trekkers?",
+        answer: "Yes — it's one of the better base hotels for trekking logistics. Staff are experienced with EBC and Annapurna permit arrangements, equipment rental recommendations and guide bookings. The location gives easy access to Thamel's trekking agencies.",
+      },
+      {
+        question: "What is included in the Manang Hotel room rate?",
+        answer: "Breakfast is included in most rate plans — a basic but solid continental/Nepali buffet. Free Wi-Fi throughout. Airport transfers available at additional cost.",
+      },
+      {
+        question: "Is Manang Hotel quiet despite the Thamel location?",
+        answer: "The hotel is on a quieter side lane rather than a main Thamel street, which helps. Upper floor rooms are noticeably quieter than ground level. Earplugs are advisable during festival periods.",
+      },
+    ],
+  },
+
+  {
+    slug: "tibet-hotel",
+    name: "Hotel Tibet",
+    areaSlug: "lazimpat",
+    stars: 3,
+    priceFromUsd: 55,
+    priceTier: "MID_RANGE" as PriceTier,
+    tagline: "Tibetan-themed three-star classic in the embassy district",
+    descriptionShort:
+      "Hotel Tibet has been a Lazimpat institution since 1970 — a 68-room property with Tibetan cultural touches, a garden courtyard, good restaurant and a calmer location than Thamel at similar prices.",
+    description: `Hotel Tibet has been welcoming travellers to Lazimpat since 1970, making it one of Kathmandu's longest-operating hotels and a fixture of the embassy district that surrounds it. The hotel was established by Tibetan refugees following the 1959 Chinese occupation and retains a distinct Tibetan character — thangka paintings on the walls, traditional carpets in the public areas, and staff who speak both Tibetan and English alongside Nepali.
+
+The 68 rooms are comfortable three-star standard, with Tibetan textile accents, reliable hot water and double-glazed windows that manage Lazimpat's relatively low traffic noise well. The garden courtyard at the centre of the property is one of the hotel's best features — a quiet retreat with a small fountain and mature planting that makes it genuinely pleasant to sit outside in the October–April months.
+
+The hotel's restaurant serves good Tibetan and Nepali food at honest prices — the butter tea and tsampa porridge breakfast options attract non-guests from the neighbourhood. The location in Lazimpat gives access to excellent independent restaurants, cafes and bakeries within 10 minutes' walk.
+
+Hotel Tibet's three-star status understates its character. It lacks the polish and amenities of four-star properties but delivers something more interesting: genuine cultural identity, a 50-year story of Tibetan refugee enterprise in Nepal, and the kind of institutional warmth that comes from staff who have worked there for decades.`,
+    coverImageUrl: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
+    latitude: 27.7200,
+    longitude: 85.3185,
+    totalRooms: 68,
+    yearBuilt: 1970,
+    yearRenovated: 2012,
+    ourScore: 7.9,
+    websiteUrl: "https://www.hoteltibet.com.np",
+    rooms: [
+      {
+        name: "Standard Room",
+        description: "Traditional Tibetan-accented rooms with hand-loomed rugs, thangka prints and comfortable beds. Garden or road views.",
+        maxOccupancy: 2,
+        bedType: "Double or Twin",
+        sizeM2: 22,
+        priceFromUsd: 55,
+      },
+      {
+        name: "Deluxe Room",
+        description: "Larger rooms overlooking the garden courtyard with upgraded linens and Tibetan artefact accents.",
+        maxOccupancy: 2,
+        bedType: "King",
+        sizeM2: 30,
+        priceFromUsd: 75,
+      },
+      {
+        name: "Suite",
+        description: "Generous suite with separate lounge furnished with antique Tibetan wooden furniture and detailed thangka collection.",
+        maxOccupancy: 3,
+        bedType: "King",
+        sizeM2: 55,
+        priceFromUsd: 130,
+      },
+    ],
+    amenitySlugs: [
+      "wifi-free","24h-reception","restaurant","bar","tour-desk","trekking-info",
+      "airport-transfer","laundry","garden","currency-exchange","luggage-storage",
+    ],
+    tagSlugs: ["cultural","historical","solo-traveller","couple","quiet-and-peaceful","budget-friendly"],
+    policy: {
+      checkinFrom: "14:00",
+      checkinUntil: "23:59",
+      checkoutFrom: "06:00",
+      checkoutUntil: "12:00",
+      cancellationHours: 24,
+      cancellationPolicy: "Free cancellation up to 24 hours before arrival.",
+      prepaymentRequired: false,
+      petsAllowed: false,
+      breakfastIncluded: true,
+      parkingAvailable: true,
+      parkingPriceUsd: 0,
+      languagesSpoken: ["en", "ne", "bo"],
+      currenciesAccepted: ["USD", "NPR"],
+    },
+    faqs: [
+      {
+        question: "What makes Hotel Tibet different from other Lazimpat hotels?",
+        answer: "The Tibetan cultural identity — founded by refugees in 1970, decorated with genuine thangkas and traditional carpets, staffed by people with a Tibetan heritage. It has a distinct cultural weight that generic hotels at similar prices lack.",
+      },
+      {
+        question: "How far is Hotel Tibet from Thamel?",
+        answer: "About 1 km from central Thamel — a 10–15 minute walk. The Lazimpat location is quieter and has better independent restaurants and cafes nearby.",
+      },
+      {
+        question: "Does Hotel Tibet serve Tibetan food?",
+        answer: "Yes — the restaurant serves Tibetan specialities including butter tea, tsampa, thukpa noodle soup and momos alongside Nepali and continental options. The Tibetan breakfast options are a draw for non-guests too.",
+      },
+    ],
+  },
+
+  {
+    slug: "hotel-marshyangdi",
+    name: "Hotel Marshyangdi",
+    areaSlug: "thamel",
+    stars: 3,
+    priceFromUsd: 50,
+    priceTier: "MID_RANGE" as PriceTier,
+    tagline: "Established Thamel three-star, reliable for trekkers since 1980",
+    descriptionShort:
+      "Hotel Marshyangdi is one of Thamel's oldest three-star properties — a 68-room hotel named after the Annapurna trekking river, with a rooftop restaurant, garden seating and reliable service for trekkers and independent travellers.",
+    description: `Hotel Marshyangdi takes its name from the Marsyangdi River that flows through the Annapurna Circuit valley — an appropriate choice for a hotel that has been a staging point for trekkers heading into the Himalayan interior since the early 1980s. It is one of the longest-established three-star properties in Thamel and has maintained a consistent standard through four decades of Nepal's tourism evolution.
+
+The 68 rooms occupy a four-storey building on a Thamel side lane, with the typical division between noisier front-of-building rooms and quieter interior-facing rooms. The decor is traditional Nepali — carved wood headboards, cotton dhaka bedspreads, framed photographs of Himalayan peaks — done competently without reaching for design ambition.
+
+The rooftop restaurant is one of the hotel's strengths: a covered terrace with views over the Thamel roofscape serving good Nepali and continental food at honest prices, popular with hotel guests and returning trekkers arriving for their post-trail meal. The garden seating area is a pleasant spot in the morning.
+
+Hotel Marshyangdi's enduring reputation is built on reliability and staff who understand the needs of trekking travellers: equipment storage during treks, permit assistance, gear recommendations, and the institutional knowledge that comes from decades of the same questions asked by arriving trekkers.`,
+    coverImageUrl: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
+    latitude: 27.7165,
+    longitude: 85.3108,
+    totalRooms: 68,
+    yearBuilt: 1982,
+    ourScore: 7.7,
+    websiteUrl: "https://www.marshyangdihotel.com",
+    rooms: [
+      {
+        name: "Standard Room",
+        description: "Traditional Nepali-style rooms with carved wood furniture and en-suite bathroom. Front rooms have Thamel views; rear rooms are quieter.",
+        maxOccupancy: 2,
+        bedType: "Double or Twin",
+        sizeM2: 20,
+        priceFromUsd: 50,
+      },
+      {
+        name: "Deluxe Room",
+        description: "Larger rooms on upper floors with mountain photograph prints, better light and courtyard views.",
+        maxOccupancy: 2,
+        bedType: "King",
+        sizeM2: 28,
+        priceFromUsd: 70,
+      },
+    ],
+    amenitySlugs: [
+      "wifi-free","24h-reception","restaurant","tour-desk","trekking-info",
+      "airport-transfer","laundry","rooftop-terrace","luggage-storage","currency-exchange",
+    ],
+    tagSlugs: ["backpacker","solo-traveller","trekking","budget-friendly","local-favourite"],
+    policy: {
+      checkinFrom: "12:00",
+      checkinUntil: "23:59",
+      checkoutFrom: "06:00",
+      checkoutUntil: "11:00",
+      cancellationHours: 24,
+      cancellationPolicy: "Free cancellation up to 24 hours before arrival.",
+      prepaymentRequired: false,
+      petsAllowed: false,
+      breakfastIncluded: true,
+      parkingAvailable: false,
+      languagesSpoken: ["en", "ne"],
+      currenciesAccepted: ["USD", "NPR"],
+    },
+    faqs: [
+      {
+        question: "Can Hotel Marshyangdi store luggage during a trek?",
+        answer: "Yes — luggage storage during treks is a standard service and one of the hotel's most valued offerings. Guests can leave bags securely while trekking to EBC, Annapurna or elsewhere and collect them on return.",
+      },
+      {
+        question: "Is Hotel Marshyangdi suitable for trekking groups?",
+        answer: "Yes — the hotel regularly hosts trekking groups and has experience with group check-ins, early morning departures and coordinating with guide companies. Advance booking is recommended for groups.",
+      },
+    ],
+  },
+
+  {
+    slug: "thamel-eco-resort",
+    name: "Thamel Eco Resort",
+    areaSlug: "thamel",
+    stars: 3,
+    priceFromUsd: 60,
+    priceTier: "MID_RANGE" as PriceTier,
+    tagline: "Nepal's most sustainable boutique hotel — eco-certified, garden-enclosed",
+    descriptionShort:
+      "Thamel Eco Resort is Nepal's most awarded eco-certified hotel — a garden property with solar power, rainwater harvesting and organic vegetables, offering quiet three-star comfort a short walk from Thamel's centre.",
+    description: `Thamel Eco Resort occupies an unusual position in Kathmandu's hotel market: it is the most seriously eco-certified property in the city, having implemented sustainability measures that go well beyond the green-washing common in the industry. Solar panels supply a significant portion of the property's energy; rainwater harvesting systems reduce mains water dependence; the kitchen garden produces herbs and vegetables for the restaurant; waste management, composting and responsible procurement are embedded in operations rather than advertised as marketing.
+
+The physical result of this investment is a hotel that feels noticeably different from its neighbours: quieter (a result of the garden boundary that buffers street noise), greener (the planted grounds are genuinely lush rather than token), and cooler in the summer months (trees and garden create natural microclimate benefits).
+
+The 35 rooms are comfortable three-star — bamboo furnishings, organic cotton linens, natural ventilation wherever possible — and the garden setting makes the outdoor areas excellent for morning yoga, breakfast and post-trek decompression. The restaurant uses its own and locally-sourced organic produce, making it one of the better hotel kitchens in the mid-range segment.
+
+Thamel Eco Resort was one of the first hotels in Nepal to receive international eco-certification and remains the benchmark for sustainable tourism accommodation in Kathmandu. For travellers who want their environmental values reflected in where they sleep, it is the clear first choice.`,
+    coverImageUrl: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
+    latitude: 27.7170,
+    longitude: 85.3095,
+    totalRooms: 35,
+    yearBuilt: 2007,
+    ourScore: 8.3,
+    websiteUrl: "https://www.thamelecoresort.com",
+    rooms: [
+      {
+        name: "Garden Room",
+        description: "Bamboo-furnished rooms with organic cotton linens, natural ventilation and direct garden access. Ground floor rooms have private garden seating.",
+        maxOccupancy: 2,
+        bedType: "Double or Twin",
+        sizeM2: 24,
+        priceFromUsd: 60,
+      },
+      {
+        name: "Deluxe Garden Room",
+        description: "Larger garden-facing rooms on upper floors with balconies overlooking the organic garden and Thamel roofscape.",
+        maxOccupancy: 2,
+        bedType: "King",
+        sizeM2: 32,
+        priceFromUsd: 80,
+      },
+      {
+        name: "Family Suite",
+        description: "Two connected garden rooms with shared terrace, suitable for families with children. Cot available.",
+        maxOccupancy: 4,
+        bedType: "Double + Twin",
+        sizeM2: 50,
+        priceFromUsd: 115,
+      },
+    ],
+    amenitySlugs: [
+      "wifi-free","24h-reception","restaurant","tour-desk","trekking-info",
+      "airport-transfer","laundry","garden","yoga",
+    ],
+    tagSlugs: ["eco-friendly","family","couple","solo-traveller","quiet-and-peaceful"],
+    policy: {
+      checkinFrom: "14:00",
+      checkinUntil: "23:59",
+      checkoutFrom: "07:00",
+      checkoutUntil: "11:00",
+      cancellationHours: 48,
+      cancellationPolicy: "Free cancellation up to 48 hours before arrival. Eco resort policy requires advance notice.",
+      prepaymentRequired: false,
+      petsAllowed: true,
+      breakfastIncluded: true,
+      parkingAvailable: false,
+      languagesSpoken: ["en", "ne"],
+      currenciesAccepted: ["USD", "NPR"],
+    },
+    faqs: [
+      {
+        question: "What eco-certifications does Thamel Eco Resort hold?",
+        answer: "The hotel holds certification from Green Globe and has received recognition from the Nepal Tourism Board for sustainable tourism practices. Solar power, rainwater harvesting, organic kitchen garden and responsible waste management are among the verified measures.",
+      },
+      {
+        question: "Is Thamel Eco Resort quiet despite the Thamel location?",
+        answer: "Noticeably quieter than most Thamel properties. The garden boundary buffers street noise significantly, and the property's position on a side lane reduces traffic disturbance. One of the quietest three-star properties in central Kathmandu.",
+      },
+      {
+        question: "Does Thamel Eco Resort serve organic food?",
+        answer: "Yes — the kitchen uses herbs and vegetables from the hotel's own garden alongside locally-sourced organic produce. The breakfast is particularly good and has an above-average selection of fresh and organic items.",
+      },
+    ],
+  },
+
+  {
+    slug: "garden-villa-hotel",
+    name: "Garden Villa Hotel",
+    areaSlug: "lazimpat",
+    stars: 3,
+    priceFromUsd: 45,
+    priceTier: "MID_RANGE" as PriceTier,
+    tagline: "Quiet Lazimpat garden hotel — value three-star for independent travellers",
+    descriptionShort:
+      "Garden Villa Hotel is a pleasant three-star property in a quiet Lazimpat residential lane, with a genuine garden, clean rooms, good breakfast and the calmer alternative to Thamel mid-range hotels.",
+    description: `Garden Villa Hotel offers a different rhythm to Thamel mid-range hotels: quieter, residential, less rushed. Tucked into a residential lane in Lazimpat behind the embassy district, it is the kind of hotel that rewards guests who want to explore Kathmandu at their own pace rather than navigate Thamel's tourism industry.
+
+The property centres on a garden that is maintained to a higher standard than most Kathmandu mid-range hotels manage — mature trees, seasonal planting, a lawn area used for al fresco breakfast in the October–April period. The rooms overlook the garden or the residential lane: both options are significantly quieter than anything in Thamel.
+
+The 28 rooms are furnished simply with good-quality beds, reliable hot showers and enough storage for a two-week trek. The breakfast is a consistent strength — fresh fruit, good bread, eggs to order alongside the standard continental items. The staff:guest ratio is higher than comparable Thamel properties, which shows in the response time and personalisation.
+
+Garden Villa is a particularly good choice for independent travellers who have been in Nepal for a week or more and want a few nights of quiet before departure, or for those visiting Kathmandu for business in the embassy district. The walk to Thamel (15 minutes) and to Boudhanath (20 minutes by taxi) keeps the main attractions accessible.`,
+    coverImageUrl: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80",
+    latitude: 27.7210,
+    longitude: 85.3168,
+    totalRooms: 28,
+    yearBuilt: 1998,
+    ourScore: 7.6,
+    rooms: [
+      {
+        name: "Garden View Room",
+        description: "Clean, simply furnished rooms looking onto the hotel garden. King or twin configuration, en-suite bathroom with hot shower.",
+        maxOccupancy: 2,
+        bedType: "King or Twin",
+        sizeM2: 20,
+        priceFromUsd: 45,
+      },
+      {
+        name: "Deluxe Room",
+        description: "Larger rooms on the upper floor with garden panorama and small writing desk — good for those working remotely.",
+        maxOccupancy: 2,
+        bedType: "King",
+        sizeM2: 28,
+        priceFromUsd: 60,
+      },
+    ],
+    amenitySlugs: [
+      "wifi-free","24h-reception","restaurant","tour-desk","trekking-info",
+      "airport-transfer","laundry","garden","luggage-storage",
+    ],
+    tagSlugs: ["solo-traveller","couple","quiet-and-peaceful","budget-friendly","eco-friendly"],
+    policy: {
+      checkinFrom: "13:00",
+      checkinUntil: "23:00",
+      checkoutFrom: "07:00",
+      checkoutUntil: "11:00",
+      cancellationHours: 24,
+      cancellationPolicy: "Free cancellation up to 24 hours before arrival.",
+      prepaymentRequired: false,
+      petsAllowed: false,
+      breakfastIncluded: true,
+      parkingAvailable: true,
+      parkingPriceUsd: 0,
+      languagesSpoken: ["en", "ne"],
+      currenciesAccepted: ["USD", "NPR"],
+    },
+    faqs: [
+      {
+        question: "How quiet is Garden Villa Hotel?",
+        answer: "Very — among the quietest hotels in this price range in central Kathmandu. The residential lane location and garden setting eliminate most of the traffic and crowd noise that affects Thamel properties.",
+      },
+      {
+        question: "Is Garden Villa Hotel convenient for visiting Thamel?",
+        answer: "Yes — about 15 minutes on foot from central Thamel, or a short NPR 150–200 tuk-tuk ride. Close enough to access Thamel's restaurants and agencies without the noise.",
+      },
+    ],
+  },
+];
+
+// ─────────────────────────────────────────────
 // SEED FUNCTION
 // ─────────────────────────────────────────────
 
 async function seedHotel(
-  data: (typeof fiveStarHotels)[0] | (typeof fourStarHotels)[0],
+  data: (typeof fiveStarHotels)[0] | (typeof fourStarHotels)[0] | (typeof threeStarHotels)[0],
   areaMap: Map<string, string>,
   amenityMap: Map<string, string>,
   tagMap: Map<string, string>,
@@ -1887,7 +2567,7 @@ export async function seedHotels() {
     buildAreaMap(prisma),
   ]);
 
-  const all = [...fiveStarHotels, ...fourStarHotels];
+  const all = [...fiveStarHotels, ...fourStarHotels, ...fourStarAdditions, ...threeStarHotels];
   let count = 0;
 
   for (const hotel of all) {

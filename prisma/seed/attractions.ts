@@ -2566,6 +2566,82 @@ A key function of the museum is its connection to living craft: Bhaktapur remain
     longitude: 85.4278,
     touristType: ["cultural", "historical", "photography"],
   },
+
+  // ─── Dharahara ────────────────────────────────────────────────────────────
+
+  {
+    slug: "dharahara-tower",
+    name: "Dharahara Tower",
+    nameLocal: "धरहरा",
+    listingType: "HISTORIC_SITE" as ListingType,
+    areaSlug: "kathmandu",
+    tagline: "Kathmandu's iconic minaret — rebuilt after the 2015 earthquake",
+    descriptionShort:
+      "Dharahara is Kathmandu's most recognisable tower — a nine-storey minaret rebuilt after the devastating 2015 earthquake, now a public monument and observation platform with sweeping views across the city.",
+    description: `Dharahara — also known as Bhimsen's Tower — is the defining landmark of central Kathmandu. The original tower was constructed in 1832 on the orders of Bhimsen Thapa, Prime Minister of Nepal, as a watchtower and symbol of the Rana state's power. At 61.88 metres it was the tallest structure in the Kathmandu Valley for over a century.
+
+The tower was partially destroyed in the 1934 Nepal–Bihar earthquake and rebuilt; the rebuilt structure stood until the catastrophic earthquake of 25 April 2015, when it collapsed entirely during the first tremor, killing hundreds of people sheltering inside and in the surrounding park. The collapse was one of the most visible symbols of that earthquake's destruction and images of the fallen tower were broadcast worldwide.
+
+The new Dharahara was inaugurated in April 2022 as a memorial and public monument — a nine-storey tower built to international seismic standards, containing a museum on Nepal's earthquake history, an observation deck at the 8th floor with 360-degree views of Kathmandu, an amphitheatre, gardens and commercial spaces. The tower is dedicated as a memorial to those who died in 2015.
+
+Visiting Dharahara today is both a sightseeing experience — the views from the observation deck across Kathmandu's rooftops to the ring of surrounding hills are excellent — and a sobering memorial. The rebuilt tower manages to be simultaneously a celebration of reconstruction and a monument to loss.`,
+    highlights: [
+      "Kathmandu's most iconic tower — rebuilt after the 2015 earthquake",
+      "360-degree observation deck at 8th floor with panoramic city views",
+      "Earthquake memorial museum within the tower",
+      "Originally built 1832 by Prime Minister Bhimsen Thapa",
+      "Inaugurated 2022 — built to modern seismic safety standards",
+      "Gardens and amphitheatre surrounding the base",
+    ],
+    significance: "National monument and memorial to 2015 earthquake victims",
+    architecturalStyle: "Neo-classical minaret, seismically reinforced reconstruction",
+    history: `The first Dharahara was built in 1832 by Bhimsen Thapa to serve as a watchtower and impress foreign visitors. It stood 61.88m tall and became the most recognisable structure in the valley. Damaged in 1934 and rebuilt, it then collapsed completely during the 7.8-magnitude earthquake of April 25, 2015, killing around 180 people. The new tower, inaugurated in April 2022, stands on the same site with substantially improved earthquake engineering and incorporates a memorial museum.`,
+    isFree: false,
+    admissionLocal: "NPR 100",
+    admissionForeigner: "NPR 200",
+    openingHoursSpec: [
+      {
+        dayOfWeek: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+        opens: "09:00",
+        closes: "17:00",
+      },
+    ],
+    bestMonths: [10, 11, 12, 1, 2, 3],
+    visitorTips: {
+      bestTime: "Clear mornings October–March for Himalayan views from observation deck",
+      howToGetThere: "Central Kathmandu (Sundhara area), 15-min walk from Thamel or 5-min taxi",
+      whatToWear: "Casual; no restrictions",
+      timeNeeded: "1 hour",
+      photography: "Observation deck offers wide-angle views of Kathmandu; best in early morning light",
+    },
+    insiderTip: "The earthquake memorial within the tower is genuinely moving — photographs, stories and structural analysis of the 2015 disaster give it historical weight beyond a simple viewpoint. Many visitors find it more affecting than they expected.",
+    nearbyAttractions: ["Basantapur Durbar Square", "Asan Bazaar", "Swayambhunath Stupa"],
+    ourScore: 8.2,
+    featured: true,
+    tagSlugs: ["historical","views","cultural","photography"],
+    faqs: [
+      {
+        question: "Is the Dharahara Tower the same one that collapsed in 2015?",
+        answer: "No — the original tower (built 1832, rebuilt after 1934) collapsed completely in the April 2015 earthquake, killing around 180 people. The current tower is a fully new structure built on the same site, inaugurated in April 2022, incorporating a memorial museum and built to modern seismic standards.",
+      },
+      {
+        question: "Can you go to the top of Dharahara Tower?",
+        answer: "Yes — the tower has an observation deck at the 8th floor accessible by lift and stairs, with 360-degree views across Kathmandu. Entry fee applies (NPR 200 for foreigners).",
+      },
+      {
+        question: "How far is Dharahara from Thamel?",
+        answer: "About 1.5 km — a 15-minute walk south through Thamel and past the old town, or 5 minutes by taxi/rickshaw. It sits near the Sundhara area, close to Basantapur Durbar Square.",
+      },
+      {
+        question: "What is in the earthquake memorial at Dharahara?",
+        answer: "The memorial museum within the tower documents the April 2015 earthquake — its seismic history, the destruction it caused to Kathmandu's heritage buildings, and Nepal's recovery. It includes photographs, structural analysis and personal testimonies.",
+      },
+    ],
+    coverImageUrl: "https://images.unsplash.com/photo-1605640840605-14ac1855827b?auto=format&fit=crop&w=1200&q=80",
+    latitude: 27.7027,
+    longitude: 85.3138,
+    touristType: ["cultural", "historical", "photography"],
+  },
 ];
 
 // ─────────────────────────────────────────────
