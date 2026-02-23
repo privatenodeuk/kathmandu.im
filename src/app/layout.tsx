@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { SearchBar } from "@/components/SearchBar";
+import { NavMore } from "@/components/NavMore";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kathmandu.im";
 
@@ -34,6 +35,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="nav__links">
               <a href="/hotels">Hotels</a>
               <a href="/attractions">Attractions</a>
+              <a href="/nightlife">Nightlife</a>
+              <NavMore />
               <SearchBar />
             </div>
           </div>

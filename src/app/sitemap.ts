@@ -24,6 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: siteUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
     { url: `${siteUrl}/hotels`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     { url: `${siteUrl}/attractions`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
+    { url: `${siteUrl}/nightlife`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
   ];
 
   const hotelRoutes: MetadataRoute.Sitemap = hotels.map((h) => ({
