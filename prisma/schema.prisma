@@ -1,0 +1,789 @@
+// kathmandu.im — Prisma Schema
+// Comprehensive travel directory: hotels, POIs, tours, restaurants, events
+// Compatible with Schema.org rich results (Hotel, TouristAttraction, TouristTrip, Restaurant, Event, FAQPage)
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ─────────────────────────────────────────────
+// ENUMS
+// ─────────────────────────────────────────────
+
+enum Status {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum ListingType {
+  TEMPLE
+  STUPA
+  PALACE
+  MUSEUM
+  PARK
+  MARKET
+  VIEWPOINT
+  MONASTERY
+  HISTORIC_SITE
+  NATURAL_SITE
+  CULTURAL_SITE
+  ACTIVITY
+  SHOPPING
+  NIGHTLIFE
+  BAR
+  ROOFTOP_BAR
+  OTHER
+}
+
+enum PriceTier {
+  FREE
+  BUDGET
+  MID_RANGE
+  UPSCALE
+  LUXURY
+}
+
+enum MediaType {
+  PHOTO
+  VIDEO
+  VIRTUAL_TOUR
+}
+
+enum DifficultyLevel {
+  EASY
+  MODERATE
+  CHALLENGING
+  STRENUOUS
+}
+
+enum TourCategory {
+  TREKKING
+  CULTURAL
+  DAY_TRIP
+  ADVENTURE
+  WILDLIFE
+  SPIRITUAL
+  FOOD
+  PHOTOGRAPHY
+}
+
+enum EventFrequency {
+  ONE_OFF
+  ANNUAL
+  MONTHLY
+  WEEKLY
+}
+
+enum ReviewSource {
+  DIRECT
+  GOOGLE
+  TRIPADVISOR
+  BOOKING
+  AGODA
+}
+
+enum EntityType {
+  PROPERTY
+  LISTING
+  TOUR
+  RESTAURANT
+  EVENT
+  AREA
+}
+
+// ─────────────────────────────────────────────
+// AREA (Neighbourhood / District)
+// ─────────────────────────────────────────────
+
+model Area {
+  id              String   @id @default(uuid())
+  slug            String   @unique
+  name            String
+  nameLocal       String? // Devanagari
+  city            String   @default("Kathmandu") // enables Pokhara, Nagarkot expansion
+  description     String?  @db.Text
+  latitude        Float?
+  longitude       Float?
+  coverImageUrl   String?
+  climate         Json     @default("{}") // {bestMonths, rainyMonths, coldMonths}
+  safetyNotes     String?
+  transportLinks  Json     @default("[]")
+  practicalInfo   Json     @default("{}") // {visa, currency, powerSockets, tipping}
+  metaTitle       String?
+  metaDescription String?
+  featured        Boolean  @default(false)
+  sortOrder       Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  properties  Property[]
+  listings    Listing[]
+  tours       Tour[]
+  restaurants Restaurant[]
+  events      Event[]
+  faqs        FAQ[]
+
+  @@index([slug])
+  @@index([featured])
+}
+
+// ─────────────────────────────────────────────
+// PROPERTY (Hotels, Guesthouses, Hostels)
+// Schema.org: Hotel / LodgingBusiness
+// ─────────────────────────────────────────────
+
+model Property {
+  id               String     @id @default(uuid())
+  slug             String     @unique
+  status           Status     @default(DRAFT)
+  name             String
+  nameLocal        String?
+  tagline          String?
+  description      String?    @db.Text
+  descriptionShort String?
+  stars            Int? // 1–5
+  priceTier        PriceTier?
+  priceFromUsd     Int?
+  addressLine1     String?
+  addressLine2     String?
+  city             String     @default("Kathmandu")
+  district         String?
+  country          String     @default("NP")
+  postalCode       String?
+  areaId           String?
+  area             Area?      @relation(fields: [areaId], references: [id])
+  latitude         Float?
+  longitude        Float?
+  googlePlaceId    String?    @unique
+  phone            String?
+  email            String?
+  websiteUrl       String?
+  bookingUrl       String?
+  affiliateUrl     String?
+  affiliateEnabled Boolean    @default(false)
+  coverImageUrl    String?
+
+  // Check-in / Check-out
+  checkinTime  String? // "15:00"
+  checkoutTime String? // "12:00"
+
+  // Hotel metadata
+  totalRooms    Int?
+  yearBuilt     Int?
+  yearRenovated Int?
+  brandChain    String? // "Hyatt", "Radisson"
+
+  // Ratings
+  ourScore          Float? // 1–10
+  googleRating      Float?
+  tripadvisorRating Float?
+  tripadvisorRank   Int?
+  reviewCount       Int    @default(0)
+
+  // Sustainability & accessibility
+  sustainabilityCert String? // "Green Globe", "LEED"
+  accessibility      Json    @default("{}") // {wheelchair, visual, hearing}
+  languagesSpoken    Json    @default("[]") // ["en","ne","zh"]
+
+  // Location
+  nearestAirportKm   Float?
+  currenciesAccepted Json   @default("[]")
+
+  // SEO
+  metaTitle       String?
+  metaDescription String?
+  schemaMarkup    Json?
+
+  // Flags
+  featured   Boolean @default(false)
+  editorPick Boolean @default(false)
+  verified   Boolean @default(false)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  publishedAt DateTime?
+
+  // Relations
+  roomTypes    RoomType[]
+  amenities    PropertyAmenity[]
+  tags         PropertyTag[]
+  reviews      Review[]
+  policy       PolicySet?
+  certificates Certificate[]
+  faqs         FAQ[]
+  media        MediaItem[] // via entityType/entityId
+
+  @@unique([name, city])
+  @@index([slug])
+  @@index([status])
+  @@index([areaId])
+  @@index([featured])
+  @@index([stars])
+}
+
+// ─────────────────────────────────────────────
+// POLICY SET — Booking.com-parity hotel policies
+// ─────────────────────────────────────────────
+
+model PolicySet {
+  id                    String   @id @default(uuid())
+  propertyId            String   @unique
+  property              Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  checkinFrom           String? // "14:00"
+  checkinUntil          String? // "23:59"
+  checkoutFrom          String? // "06:00"
+  checkoutUntil         String? // "12:00"
+  cancellationPolicy    String?  @db.Text
+  cancellationHours     Int? // free cancellation up to N hours before
+  prepaymentRequired    Boolean  @default(false)
+  petsAllowed           Boolean  @default(false)
+  petsNotes             String?
+  smokingAllowed        Boolean  @default(false)
+  smokingNotes          String?
+  childrenAllowed       Boolean  @default(true)
+  childrenNotes         String?
+  minCheckinAge         Int?
+  accessibilityFeatures Json     @default("[]") // ["wheelchair_accessible","braille_signage"]
+  breakfastIncluded     Boolean  @default(false)
+  breakfastPriceUsd     Int?
+  parkingAvailable      Boolean  @default(false)
+  parkingPriceUsd       Int?
+  parkingNotes          String?
+  languagesSpoken       Json     @default("[]")
+  currenciesAccepted    Json     @default("[]")
+  updatedAt             DateTime @updatedAt
+}
+
+// ─────────────────────────────────────────────
+// ROOM TYPE
+// ─────────────────────────────────────────────
+
+model RoomType {
+  id           String   @id @default(uuid())
+  propertyId   String
+  property     Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  name         String // "Deluxe Double", "Superior King"
+  description  String?
+  maxOccupancy Int?
+  bedType      String? // "King", "Twin", "Bunk"
+  sizeM2       Float?
+  priceFromUsd Int?
+  amenities    Json     @default("[]")
+  imageUrl     String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([propertyId])
+}
+
+// ─────────────────────────────────────────────
+// AMENITY
+// ─────────────────────────────────────────────
+
+model Amenity {
+  id         String            @id @default(uuid())
+  slug       String            @unique
+  name       String
+  category   String // "General", "Room", "Food & Drink", "Services", "Outdoor"
+  icon       String? // icon name for UI
+  sortOrder  Int               @default(0)
+  properties PropertyAmenity[]
+
+  @@index([category])
+}
+
+model PropertyAmenity {
+  propertyId String
+  amenityId  String
+  notes      String?
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  amenity    Amenity  @relation(fields: [amenityId], references: [id], onDelete: Cascade)
+
+  @@id([propertyId, amenityId])
+}
+
+// ─────────────────────────────────────────────
+// TAG (shared taxonomy)
+// ─────────────────────────────────────────────
+
+model Tag {
+  id          String          @id @default(uuid())
+  slug        String          @unique
+  name        String
+  category    String? // "Experience", "Vibe", "Type"
+  color       String? // hex for UI badges
+  sortOrder   Int             @default(0)
+  properties  PropertyTag[]
+  listings    ListingTag[]
+  tours       TourTag[]
+  restaurants RestaurantTag[]
+  events      EventTag[]
+
+  @@index([category])
+}
+
+model PropertyTag {
+  propertyId String
+  tagId      String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  tag        Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([propertyId, tagId])
+}
+
+model ListingTag {
+  listingId String
+  tagId     String
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([listingId, tagId])
+}
+
+model TourTag {
+  tourId String
+  tagId  String
+  tour   Tour   @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  tag    Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([tourId, tagId])
+}
+
+model RestaurantTag {
+  restaurantId String
+  tagId        String
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  tag          Tag        @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([restaurantId, tagId])
+}
+
+model EventTag {
+  eventId String
+  tagId   String
+  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  tag     Tag    @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([eventId, tagId])
+}
+
+// ─────────────────────────────────────────────
+// LISTING (Points of Interest — temples, stupas, museums, parks, etc.)
+// Schema.org: TouristAttraction
+// ─────────────────────────────────────────────
+
+model Listing {
+  id               String      @id @default(uuid())
+  slug             String      @unique
+  status           Status      @default(DRAFT)
+  listingType      ListingType
+  name             String
+  nameLocal        String? // Devanagari
+  tagline          String?
+  description      String?     @db.Text
+  descriptionShort String?
+
+  // Location
+  addressLine1  String?
+  areaId        String?
+  area          Area?   @relation(fields: [areaId], references: [id])
+  latitude      Float?
+  longitude     Float?
+  googlePlaceId String? @unique
+
+  // Contact & booking
+  phone            String?
+  email            String?
+  websiteUrl       String?
+  ticketUrl        String?
+  affiliateUrl     String?
+  affiliateEnabled Boolean @default(false)
+  coverImageUrl    String?
+
+  // Visiting info
+  openingHoursSpec   Json? // Schema.org OpeningHoursSpecification[]
+  bestMonths         Json             @default("[]") // [10,11,3,4]
+  difficulty         DifficultyLevel?
+  isFree             Boolean          @default(false)
+  admissionLocal     String? // "NPR 1000"
+  admissionForeigner String? // "NPR 3000"
+  touristType        Json             @default("[]") // ["family","solo","pilgrim"]
+  accessibilityNotes String?
+
+  // Rich editorial content
+  history            String? @db.Text
+  highlights         Json    @default("[]") // ["7 UNESCO-listed structures"]
+  visitorTips        Json    @default("{}") // {bestTime, howToGetThere, whatToWear, timeNeeded, photography}
+  nearbyAttractions  Json    @default("[]") // ["Boudhanath","Pashupatinath"]
+  insiderTip         String? @db.Text
+  significance       String? // "UNESCO World Heritage Site since 1979"
+  lastRestoredYear   Int?
+  architecturalStyle String? // "Newari pagoda", "Tibetan stupa"
+  deityOrSubject     String? // for temples: "Lord Shiva"
+  eventCalendar      Json    @default("[]") // [{name, month, description}]
+
+  // Ratings
+  ourScore     Float?
+  googleRating Float?
+  reviewCount  Int    @default(0)
+
+  // SEO
+  metaTitle       String?
+  metaDescription String?
+  schemaMarkup    Json?
+
+  // Flags
+  featured   Boolean @default(false)
+  editorPick Boolean @default(false)
+  verified   Boolean @default(false)
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  publishedAt DateTime?
+
+  // Relations
+  tags         ListingTag[]
+  reviews      Review[]
+  faqs         FAQ[]
+  certificates Certificate[]
+  media        MediaItem[] // via entityType/entityId
+
+  @@unique([name, listingType, areaId])
+  @@index([slug])
+  @@index([status])
+  @@index([listingType])
+  @@index([areaId])
+  @@index([featured])
+  @@index([isFree])
+}
+
+// ─────────────────────────────────────────────
+// TOUR (Treks, Day Trips, Activities)
+// Schema.org: TouristTrip
+// ─────────────────────────────────────────────
+
+model Tour {
+  id               String          @id @default(uuid())
+  slug             String          @unique
+  status           Status          @default(DRAFT)
+  name             String
+  nameLocal        String?
+  tagline          String?
+  description      String?         @db.Text
+  descriptionShort String?
+  tourCategory     TourCategory
+  difficulty       DifficultyLevel @default(MODERATE)
+  durationDays     Int?
+  durationHours    Float?
+  maxGroupSize     Int?
+  minAge           Int?
+  departurePoint   String?
+  departureLat     Float?
+  departureLng     Float?
+  endPoint         String?
+  included         Json            @default("[]") // ["guide","permits","lunch"]
+  excluded         Json            @default("[]") // ["flights","tips","insurance"]
+  highlights       Json            @default("[]")
+  itineraryStops   Json            @default("[]") // [{day,title,description,lat,lng}]
+  coverImageUrl    String?
+  priceFromUsd     Int?
+  priceIsPerPerson Boolean         @default(true)
+  availableMonths  Json            @default("[]") // [10,11,3,4]
+  bookingUrl       String?
+  affiliateUrl     String?
+  affiliateEnabled Boolean         @default(false)
+  ourScore         Float?
+  googleRating     Float?
+  reviewCount      Int             @default(0)
+  metaTitle        String?
+  metaDescription  String?
+  schemaMarkup     Json?
+  featured         Boolean         @default(false)
+  editorPick       Boolean         @default(false)
+  areaId           String?
+  area             Area?           @relation(fields: [areaId], references: [id])
+  tags             TourTag[]
+  reviews          Review[]
+  faqs             FAQ[]
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  publishedAt      DateTime?
+  media            MediaItem[]
+
+  @@unique([name, tourCategory, areaId])
+  @@index([slug])
+  @@index([status])
+  @@index([tourCategory])
+  @@index([featured])
+  @@index([difficulty])
+}
+
+// ─────────────────────────────────────────────
+// RESTAURANT (Cafes, Restaurants, Street Food)
+// Schema.org: FoodEstablishment / Restaurant
+// ─────────────────────────────────────────────
+
+model Restaurant {
+  id                  String          @id @default(uuid())
+  slug                String          @unique
+  status              Status          @default(DRAFT)
+  name                String
+  nameLocal           String?
+  tagline             String?
+  description         String?         @db.Text
+  descriptionShort    String?
+  cuisines            Json            @default("[]") // ["NEPALI","TIBETAN","CONTINENTAL"]
+  pricePerPersonMin   Int? // USD
+  pricePerPersonMax   Int?
+  priceTier           PriceTier?
+  addressLine1        String?
+  areaId              String?
+  area                Area?           @relation(fields: [areaId], references: [id])
+  latitude            Float?
+  longitude           Float?
+  googlePlaceId       String?         @unique
+  phone               String?
+  email               String?
+  websiteUrl          String?
+  menuUrl             String?
+  reservationUrl      String?
+  openingHours        Json? // Schema.org weekday_text format
+  coverImageUrl       String?
+  acceptsReservations Boolean         @default(false)
+  acceptsWalkIns      Boolean         @default(true)
+  outdoorSeating      Boolean         @default(false)
+  deliveryAvailable   Boolean         @default(false)
+  veganOptions        Boolean         @default(false)
+  vegetarianOptions   Boolean         @default(false)
+  halalOptions        Boolean         @default(false)
+  glutenFreeOptions   Boolean         @default(false)
+  michelinStars       Int             @default(0)
+  tripadvisorRank     Int?
+  googleRating        Float?
+  reviewCount         Int             @default(0)
+  ourScore            Float?
+  affiliateUrl        String?
+  affiliateEnabled    Boolean         @default(false)
+  metaTitle           String?
+  metaDescription     String?
+  schemaMarkup        Json?
+  featured            Boolean         @default(false)
+  editorPick          Boolean         @default(false)
+  verified            Boolean         @default(false)
+  tags                RestaurantTag[]
+  reviews             Review[]
+  faqs                FAQ[]
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+  publishedAt         DateTime?
+
+  @@unique([name, areaId])
+  @@index([slug])
+  @@index([status])
+  @@index([areaId])
+  @@index([featured])
+  @@index([priceTier])
+}
+
+// ─────────────────────────────────────────────
+// EVENT (Festivals, Cultural Events)
+// Schema.org: Event / Festival
+// ─────────────────────────────────────────────
+
+model Event {
+  id               String         @id @default(uuid())
+  slug             String         @unique
+  status           Status         @default(DRAFT)
+  name             String
+  nameLocal        String?
+  tagline          String?
+  description      String?        @db.Text
+  descriptionShort String?
+  startDate        DateTime?
+  endDate          DateTime?
+  frequency        EventFrequency @default(ANNUAL)
+  venueName        String?
+  venueAddress     String?
+  areaId           String?
+  area             Area?          @relation(fields: [areaId], references: [id])
+  latitude         Float?
+  longitude        Float?
+  coverImageUrl    String?
+  isFree           Boolean        @default(true)
+  ticketPrice      String?
+  ticketUrl        String?
+  highlights       Json           @default("[]")
+  bestFor          Json           @default("[]") // ["family","photographers","pilgrims"]
+  metaTitle        String?
+  metaDescription  String?
+  schemaMarkup     Json?
+  featured         Boolean        @default(false)
+  tags             EventTag[]
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@unique([name, startDate])
+  @@index([slug])
+  @@index([status])
+  @@index([startDate])
+  @@index([featured])
+}
+
+// ─────────────────────────────────────────────
+// REVIEW (polymorphic via entityType/entityId)
+// ─────────────────────────────────────────────
+
+model Review {
+  id              String       @id @default(uuid())
+  entityType      EntityType
+  entityId        String
+  rating          Float // 1–10
+  title           String?
+  body            String?      @db.Text
+  authorName      String
+  authorEmail     String?
+  authorLocation  String?
+  source          ReviewSource @default(DIRECT)
+  externalId      String?
+  helpful         Int          @default(0)
+  ownerResponse   String?      @db.Text
+  ownerResponseAt DateTime?
+  language        String       @default("en")
+  stayNights      Int?
+  roomTypeId      String?
+  published       Boolean      @default(false)
+  createdAt       DateTime     @default(now())
+
+  // Typed FK relations for Prisma query filters
+  propertyId   String?
+  property     Property?   @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  listingId    String?
+  listing      Listing?    @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  tourId       String?
+  tour         Tour?       @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  restaurantId String?
+  restaurant   Restaurant? @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+
+  @@index([entityType, entityId])
+  @@index([published])
+  @@index([source])
+}
+
+// ─────────────────────────────────────────────
+// MEDIA ITEM — replaces JSON imageUrl arrays
+// Enables proper attribution and multiple media types
+// ─────────────────────────────────────────────
+
+model MediaItem {
+  id         String     @id @default(uuid())
+  entityType EntityType
+  entityId   String
+  mediaType  MediaType  @default(PHOTO)
+  url        String
+  thumbUrl   String?
+  alt        String?
+  caption    String?
+  credit     String? // photographer name
+  creditUrl  String?
+  width      Int?
+  height     Int?
+  sortOrder  Int        @default(0)
+  isPrimary  Boolean    @default(false)
+  isHero     Boolean    @default(false)
+  createdAt  DateTime   @default(now())
+
+  // Typed FK relations
+  propertyId String?
+  property   Property? @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  listingId  String?
+  listing    Listing?  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  tourId     String?
+  tour       Tour?     @relation(fields: [tourId], references: [id], onDelete: Cascade)
+
+  @@index([entityType, entityId])
+  @@index([isPrimary])
+}
+
+// ─────────────────────────────────────────────
+// FAQ (FAQPage rich results — polymorphic)
+// ─────────────────────────────────────────────
+
+model FAQ {
+  id         String     @id @default(uuid())
+  entityType EntityType
+  entityId   String
+  question   String
+  answer     String     @db.Text
+  sortOrder  Int        @default(0)
+  published  Boolean    @default(true)
+
+  propertyId   String?
+  property     Property?   @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  listingId    String?
+  listing      Listing?    @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  tourId       String?
+  tour         Tour?       @relation(fields: [tourId], references: [id], onDelete: Cascade)
+  restaurantId String?
+  restaurant   Restaurant? @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
+  areaId       String?
+  area         Area?       @relation(fields: [areaId], references: [id], onDelete: Cascade)
+
+  @@index([entityType, entityId])
+  @@index([published])
+}
+
+// ─────────────────────────────────────────────
+// CERTIFICATE / AWARD
+// ─────────────────────────────────────────────
+
+model Certificate {
+  id         String     @id @default(uuid())
+  entityType EntityType
+  entityId   String
+  name       String // "TripAdvisor Travellers' Choice 2024"
+  issuer     String // "TripAdvisor"
+  year       Int?
+  badgeUrl   String?
+  url        String?
+
+  propertyId String?
+  property   Property? @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  listingId  String?
+  listing    Listing?  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@index([entityType, entityId])
+}
+
+// ─────────────────────────────────────────────
+// ITINERARY — Curated trip collections
+// Schema.org: ItemList
+// ─────────────────────────────────────────────
+
+model Itinerary {
+  id              String          @id @default(uuid())
+  slug            String          @unique
+  status          Status          @default(DRAFT)
+  title           String
+  description     String?         @db.Text
+  durationDays    Int
+  coverImageUrl   String?
+  difficulty      DifficultyLevel @default(EASY)
+  bestMonths      Json            @default("[]")
+  stops           Json            @default("[]") // [{order,entityType,entityId,notes,durationHours}]
+  metaTitle       String?
+  metaDescription String?
+  featured        Boolean         @default(false)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([slug])
+  @@index([featured])
+}
