@@ -2616,9 +2616,11 @@ async function seedAttraction(
     metaDescription: data.descriptionShort,
   };
 
+  // Exclude coverImageUrl from update so sketch-generated images are never overwritten
+  const { coverImageUrl: _cover, ...listingDataWithoutImage } = listingData;
   const listing = await prisma.listing.upsert({
     where: { slug: data.slug },
-    update: listingData,
+    update: listingDataWithoutImage,
     create: listingData,
   });
 
