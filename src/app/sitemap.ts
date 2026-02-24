@@ -6,9 +6,10 @@ export const dynamic = "force-dynamic";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kathmandu.im";
 
-  const [hotels, attractions, tags] = await Promise.all([
+  const [hotels, attractions, tags, restaurants] = await Promise.all([
     prisma.property.findMany({ where: { status: "PUBLISHED" }, select: { slug: true, updatedAt: true } }),
     prisma.listing.findMany({ where: { status: "PUBLISHED" }, select: { slug: true, updatedAt: true } }),
+    prisma.restaurant.findMany({ where: { status: "PUBLISHED" }, select: { slug: true } }),
     prisma.tag.findMany({
       where: {
         OR: [
@@ -26,6 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${siteUrl}/attractions`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
     { url: `${siteUrl}/nightlife`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
     { url: `${siteUrl}/map`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.8 },
+    { url: `${siteUrl}/restaurants`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.9 },
   ];
 
   const hotelRoutes: MetadataRoute.Sitemap = hotels.map((h) => ({
@@ -49,5 +51,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...hotelRoutes, ...attractionRoutes, ...tagRoutes];
+  const restaurantRoutes: MetadataRoute.Sitemap = restaurants.map((r) => ({
+    url: `${siteUrl}/restaurants/${r.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticRoutes, ...hotelRoutes, ...attractionRoutes, ...restaurantRoutes, ...tagRoutes];
 }

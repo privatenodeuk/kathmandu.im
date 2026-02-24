@@ -566,6 +566,24 @@ a.tag:hover {
 }
 .cover-placeholder__icon { font-size: 1.75rem; opacity: 0.7; }
 
+/* Restaurant card placeholder */
+.cover-placeholder--restaurant {
+  height: 200px;
+  background: linear-gradient(135deg, #2D1B0E 0%, #6B3A1F 50%, #C87941 100%);
+}
+
+/* Restaurant hero — warm gradient instead of photo */
+.detail-hero--restaurant {
+  background: linear-gradient(135deg, #1a0f07 0%, #3d1f0a 40%, #7a4420 70%, #C87941 100%);
+  min-height: 380px;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+}
+.detail-hero--restaurant .detail-hero__overlay {
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 100%);
+}
+
 /* ── Affiliate CTA ── */
 .affiliate-box {
   background: #FDF6ED;

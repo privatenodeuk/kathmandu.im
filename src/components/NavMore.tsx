@@ -6,6 +6,7 @@ const CATEGORIES = [
   { label: "Map", href: "/map", icon: "🗺️", desc: "All locations" },
   { label: "Hotels", href: "/hotels", icon: "🏨", desc: "5-star & boutique" },
   { label: "Attractions", href: "/attractions", icon: "🛕", desc: "Temples, stupas & more" },
+  { label: "Restaurants", href: "/restaurants", icon: "🍽️", desc: "Curated dining guide" },
   { label: "Bars & Nightlife", href: "/nightlife", icon: "🍸", desc: "Rooftop bars & clubs" },
 ];
 

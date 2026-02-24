@@ -1,6 +1,7 @@
 const EXPLORE = [
   { label: "Hotels", href: "/hotels" },
   { label: "Attractions", href: "/attractions" },
+  { label: "Restaurants", href: "/restaurants" },
   { label: "Bars & Nightlife", href: "/nightlife" },
   { label: "Map", href: "/map" },
 ];

@@ -12,6 +12,7 @@ import { seedAmenities } from "./amenities";
 import { seedTags } from "./tags";
 import { seedHotels } from "./hotels";
 import { seedAttractions } from "./attractions";
+import { seedRestaurants } from "./restaurants";
 
 const prisma = new PrismaClient();
 
@@ -23,6 +24,7 @@ async function main() {
   await seedTags();
   await seedHotels();
   await seedAttractions();
+  await seedRestaurants();
 
   console.log("\n🎉 Seed complete!");
 }
