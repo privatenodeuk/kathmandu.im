@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
+import { CoverImage } from "@/components/CoverImage";
 
 export const dynamic = "force-dynamic";
 
@@ -42,6 +43,7 @@ export default async function RestaurantsPage() {
   const restaurants = await prisma.restaurant.findMany({
     where: { status: "PUBLISHED" },
     include: { area: true },
+    // coverImageUrl is included by default (no select restriction)
     orderBy: [{ featured: "desc" }, { ourScore: "desc" }, { name: "asc" }],
   });
 
@@ -75,7 +77,12 @@ export default async function RestaurantsPage() {
               {group.map((r) => (
                 <a key={r.id} href={`/restaurants/${r.slug}`} className="card">
                   <div className="card__img-wrap">
-                    <div className="cover-placeholder cover-placeholder--restaurant" />
+                    <CoverImage
+                      src={r.coverImageUrl}
+                      alt={r.name}
+                      entityType="restaurant"
+                      className="card__img"
+                    />
                   </div>
                   <div className="card__body">
                     <div className="card__meta">

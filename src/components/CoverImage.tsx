@@ -19,6 +19,7 @@ const GRADIENTS: Record<string, string> = {
   MARKET:       "linear-gradient(135deg, #150A00 0%, #4A2000 50%, #B05010 100%)",
   VIEWPOINT:    "linear-gradient(135deg, #020510 0%, #0A1545 50%, #1A4590 100%)",
   PALACE:       "linear-gradient(135deg, #0A0805 0%, #2A2010 50%, #6A5020 100%)",
+  restaurant:   "linear-gradient(135deg, #2D1B0E 0%, #6B3A1F 50%, #C87941 100%)",
   default:      "linear-gradient(135deg, #0A0A0A 0%, #2A1A0A 50%, #5A3010 100%)",
 };
 
@@ -75,6 +76,7 @@ function getIcon(type: string) {
     MARKET: "🛍️",
     CULTURAL_SITE: "🎭",
     PALACE: "🏰",
+    restaurant: "🍽️",
   };
   return icons[type] ?? "📍";
 }

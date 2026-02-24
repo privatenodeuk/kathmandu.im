@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
+import { CoverImage } from "@/components/CoverImage";
 import { MiniMapWrapper as MiniMap } from "@/components/MiniMapWrapper";
 
 export const dynamic = "force-dynamic";
@@ -50,8 +51,14 @@ export default async function RestaurantPage({
 
   return (
     <>
-      {/* Hero — colour gradient since no cover image yet */}
-      <div className="detail-hero detail-hero--restaurant">
+      {/* Hero */}
+      <div className="detail-hero">
+        <CoverImage
+          src={r.coverImageUrl}
+          alt={r.name}
+          entityType="restaurant"
+          className="detail-hero__img"
+        />
         <div className="detail-hero__overlay" />
         <div className="detail-hero__content">
           <div className="detail-hero__type">

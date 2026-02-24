@@ -10,6 +10,7 @@
  *   npx tsx scripts/generate-sketches.ts --slug boudhanath-stupa  — single
  *   npx tsx scripts/generate-sketches.ts --type hotels            — hotels only
  *   npx tsx scripts/generate-sketches.ts --type attractions       — attractions only
+ *   npx tsx scripts/generate-sketches.ts --type restaurants       — restaurants only
  */
 
 import { prisma } from "../src/lib/prisma";
@@ -147,6 +148,16 @@ function hotelPrompt(name: string, stars: number | null, area: string): string {
   );
 }
 
+function restaurantPrompt(name: string, cuisines: string[], area: string): string {
+  const cuisineStr = cuisines.map((c) => c.replace(/_/g, " ").toLowerCase()).join(", ");
+  return (
+    `Detailed black and white pencil sketch of "${name}", a ${cuisineStr} restaurant in ${area}, Kathmandu, Nepal. ` +
+    `Show the restaurant exterior or dining room with warm atmospheric details — ` +
+    `wooden beams, lanterns, courtyard seating, or traditional Newari architectural elements. ` +
+    `Black and white only, pencil shading for depth, white background, vintage travel journal style.`
+  );
+}
+
 function attractionPrompt(name: string, type: string, area: string): string {
   const descs: Record<string, string> = {
     TEMPLE: "Hindu or Buddhist temple with tiered pagoda roofs and stone carvings",
@@ -229,6 +240,37 @@ async function processAttraction(a: {
   return true;
 }
 
+async function processRestaurant(r: {
+  id: string; slug: string; name: string;
+  cuisines: unknown; area: { name: string } | null;
+}): Promise<boolean> {
+  const outPath = path.join(OUT_DIR, `${r.slug}.jpg`);
+  if (fs.existsSync(outPath)) {
+    console.log(`  ⏭  ${r.name} — already exists`);
+    return false;
+  }
+
+  const cuisines = Array.isArray(r.cuisines) ? (r.cuisines as string[]) : [];
+  let msg: any[];
+  const photo = await fetchPlacesPhoto(r.name);
+  if (photo) {
+    console.log(`  🗺  ${r.name} — using Google Maps photo → sketching…`);
+    msg = photoMessage(photo, r.name);
+  } else {
+    console.log(`  ✏  ${r.name} — text-to-sketch…`);
+    msg = textMessage(restaurantPrompt(r.name, cuisines, r.area?.name ?? "Kathmandu"));
+  }
+
+  const imgBuf = await generateSketch(msg, MODEL_ATTRACTIONS);
+  fs.writeFileSync(outPath, imgBuf);
+  await prisma.restaurant.update({
+    where: { id: r.id },
+    data: { coverImageUrl: `/images/${r.slug}.jpg` },
+  });
+  console.log(`  ✓  ${r.slug}.jpg  (${(imgBuf.length / 1024).toFixed(0)}KB)`);
+  return true;
+}
+
 // ── Main ─────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -238,6 +280,7 @@ async function main() {
 
   const runHotels = !typeFilter || typeFilter === "hotels";
   const runAttractions = !typeFilter || typeFilter === "attractions";
+  const runRestaurants = !typeFilter || typeFilter === "restaurants";
   let generated = 0;
 
   if (runHotels) {
@@ -269,6 +312,23 @@ async function main() {
         if (await processAttraction(a)) { generated++; await sleep(4_000); }
       } catch (e: any) {
         console.error(`  ✗  ${a.name}: ${e.message?.slice(0, 150)}`);
+        await sleep(6_000);
+      }
+    }
+  }
+
+  if (runRestaurants) {
+    console.log("\n🍽️  Restaurants");
+    const restaurants = await prisma.restaurant.findMany({
+      where: slugFilter ? { slug: slugFilter } : { status: "PUBLISHED" },
+      orderBy: [{ featured: "desc" }, { ourScore: "desc" }],
+      include: { area: true },
+    });
+    for (const r of restaurants) {
+      try {
+        if (await processRestaurant(r)) { generated++; await sleep(4_000); }
+      } catch (e: any) {
+        console.error(`  ✗  ${r.name}: ${e.message?.slice(0, 150)}`);
         await sleep(6_000);
       }
     }
