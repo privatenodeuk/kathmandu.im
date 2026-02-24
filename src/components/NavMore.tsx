@@ -3,13 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 
 const CATEGORIES = [
+  { label: "Map", href: "/map", icon: "🗺️", desc: "All locations" },
   { label: "Hotels", href: "/hotels", icon: "🏨", desc: "5-star & boutique" },
   { label: "Attractions", href: "/attractions", icon: "🛕", desc: "Temples, stupas & more" },
   { label: "Bars & Nightlife", href: "/nightlife", icon: "🍸", desc: "Rooftop bars & clubs" },
-  { label: "UNESCO Sites", href: "/tags/unesco-heritage", icon: "⭐", desc: "World Heritage" },
-  { label: "Spiritual", href: "/tags/spiritual", icon: "🙏", desc: "Temples & monasteries" },
-  { label: "Luxury", href: "/tags/luxury", icon: "✨", desc: "Premium experiences" },
-  { label: "Photography", href: "/tags/photography", icon: "📷", desc: "Best photo spots" },
 ];
 
 export function NavMore() {

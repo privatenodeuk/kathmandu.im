@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { SearchBar } from "@/components/SearchBar";
 import { NavMore } from "@/components/NavMore";
+import { Footer } from "@/components/Footer";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kathmandu.im";
 
@@ -41,18 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </nav>
         <main>{children}</main>
-        <footer className="footer">
-          <div className="footer__inner">
-            <span className="footer__logo">kathmandu.im</span>
-            <span className="footer__copy">
-              © {new Date().getFullYear()} kathmandu.im — The Kathmandu Valley Travel Guide
-            </span>
-            <div className="footer__links">
-              <a href="/hotels">Hotels</a>
-              <a href="/attractions">Attractions</a>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </body>
     </html>
   );

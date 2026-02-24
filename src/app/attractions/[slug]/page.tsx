@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import { CoverImage } from "@/components/CoverImage";
+import { MiniMapWrapper as MiniMap } from "@/components/MiniMapWrapper";
 
 export async function generateMetadata({
   params,
@@ -223,6 +224,24 @@ export default async function AttractionPage({
                 </div>
               )}
             </div>
+
+            {/* Location mini-map */}
+            {attraction.latitude && attraction.longitude && (
+              <div className="info-box">
+                <div className="info-box__title">Location</div>
+                <div style={{ marginTop: 8, borderRadius: 8, overflow: "hidden" }}>
+                  <MiniMap lat={attraction.latitude} lng={attraction.longitude} name={attraction.name} />
+                </div>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${attraction.latitude},${attraction.longitude}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ fontSize: "0.78rem", color: "var(--accent)", marginTop: 8, display: "block" }}
+                >
+                  Open in Google Maps ↗
+                </a>
+              </div>
+            )}
 
             {/* Getting there */}
             {visitorTips.howToGetThere && (
