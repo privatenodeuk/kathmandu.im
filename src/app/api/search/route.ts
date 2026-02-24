@@ -5,9 +5,9 @@ export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
   const q = req.nextUrl.searchParams.get("q")?.trim() ?? "";
-  if (q.length < 2) return NextResponse.json({ hotels: [], attractions: [] });
+  if (q.length < 2) return NextResponse.json({ hotels: [], attractions: [], restaurants: [] });
 
-  const [hotels, attractions] = await Promise.all([
+  const [hotels, attractions, restaurants] = await Promise.all([
     prisma.property.findMany({
       where: {
         status: "PUBLISHED",
@@ -34,7 +34,20 @@ export async function GET(req: NextRequest) {
       take: 8,
       orderBy: [{ featured: "desc" }, { ourScore: "desc" }],
     }),
+    prisma.restaurant.findMany({
+      where: {
+        status: "PUBLISHED",
+        OR: [
+          { name: { contains: q, mode: "insensitive" } },
+          { tagline: { contains: q, mode: "insensitive" } },
+          { area: { name: { contains: q, mode: "insensitive" } } },
+        ],
+      },
+      select: { slug: true, name: true, priceTier: true, area: { select: { name: true } } },
+      take: 5,
+      orderBy: [{ featured: "desc" }, { ourScore: "desc" }],
+    }),
   ]);
 
-  return NextResponse.json({ hotels, attractions });
+  return NextResponse.json({ hotels, attractions, restaurants });
 }

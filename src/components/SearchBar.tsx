@@ -16,6 +16,13 @@ interface Attraction {
   area: { name: string } | null;
 }
 
+interface Restaurant {
+  slug: string;
+  name: string;
+  priceTier: string | null;
+  area: { name: string } | null;
+}
+
 const TYPE_LABELS: Record<string, string> = {
   TEMPLE: "Temple", STUPA: "Stupa", PALACE: "Palace", MUSEUM: "Museum",
   PARK: "Park", MARKET: "Market", VIEWPOINT: "Viewpoint", MONASTERY: "Monastery",
@@ -27,6 +34,7 @@ const TYPE_LABELS: Record<string, string> = {
 function TypePill({ type }: { type: string }) {
   const COLOR: Record<string, string> = {
     hotel: "#C87941",
+    restaurant: "#e11d48",
     TEMPLE: "#7c3aed", STUPA: "#d97706", MONASTERY: "#0f766e",
     MUSEUM: "#0369a1", PARK: "#16a34a", MARKET: "#b45309",
     VIEWPOINT: "#1d4ed8", HISTORIC_SITE: "#92400e", CULTURAL_SITE: "#ea580c",
@@ -34,7 +42,7 @@ function TypePill({ type }: { type: string }) {
     BAR: "#6d28d9", ROOFTOP_BAR: "#0ea5e9",
   };
   const color = COLOR[type] ?? "#666";
-  const label = type === "hotel" ? "Hotel" : (TYPE_LABELS[type] ?? type);
+  const label = type === "hotel" ? "Hotel" : type === "restaurant" ? "Restaurant" : (TYPE_LABELS[type] ?? type);
   return (
     <span style={{
       fontSize: "0.65rem", fontWeight: 600, padding: "2px 8px",
@@ -51,16 +59,18 @@ export function SearchBar() {
   const [query, setQuery] = useState("");
   const [hotels, setHotels] = useState<Hotel[]>([]);
   const [attractions, setAttractions] = useState<Attraction[]>([]);
+  const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
-  const totalResults = hotels.length + attractions.length;
+  const totalResults = hotels.length + attractions.length + restaurants.length;
   const allResults = [
     ...hotels.map((h) => ({ href: `/hotels/${h.slug}`, name: h.name, sub: h.area?.name ?? "", type: "hotel" })),
     ...attractions.map((a) => ({ href: `/attractions/${a.slug}`, name: a.name, sub: a.area?.name ?? "", type: a.listingType })),
+    ...restaurants.map((r) => ({ href: `/restaurants/${r.slug}`, name: r.name, sub: r.area?.name ?? "", type: "restaurant" })),
   ];
 
   const openSearch = () => {
@@ -73,6 +83,7 @@ export function SearchBar() {
     setQuery("");
     setHotels([]);
     setAttractions([]);
+    setRestaurants([]);
     setActive(-1);
   }, []);
 
@@ -95,6 +106,7 @@ export function SearchBar() {
         const data = await res.json();
         setHotels(data.hotels ?? []);
         setAttractions(data.attractions ?? []);
+        setRestaurants(data.restaurants ?? []);
         setActive(-1);
       } finally {
         setLoading(false);
@@ -170,7 +182,7 @@ export function SearchBar() {
                 value={query}
                 onChange={onInput}
                 onKeyDown={onKeyDown}
-                placeholder="Search hotels, temples, museums…"
+                placeholder="Search hotels, restaurants, temples…"
                 style={{
                   flex: 1, border: "none", outline: "none",
                   fontSize: "1.05rem", fontFamily: "inherit",
@@ -242,6 +254,33 @@ export function SearchBar() {
                           <span style={{ flex: 1, fontWeight: 500, fontSize: "0.9rem", color: "var(--text)" }}>{a.name}</span>
                           {a.area && <span style={{ fontSize: "0.78rem", color: "var(--muted)" }}>{a.area.name}</span>}
                           <TypePill type={a.listingType} />
+                        </a>
+                      );
+                    })}
+                  </div>
+                )}
+                {restaurants.length > 0 && (
+                  <div>
+                    <div style={{ padding: "10px 20px 4px", fontSize: "0.68rem", fontWeight: 700, color: "var(--muted)", letterSpacing: "0.1em", textTransform: "uppercase" }}>Restaurants</div>
+                    {restaurants.map((r, i) => {
+                      const idx = hotels.length + attractions.length + i;
+                      return (
+                        <a
+                          key={r.slug}
+                          href={`/restaurants/${r.slug}`}
+                          onClick={closeSearch}
+                          style={{
+                            display: "flex", alignItems: "center", gap: 12,
+                            padding: "10px 20px", textDecoration: "none",
+                            background: active === idx ? "var(--bg)" : "transparent",
+                            transition: "background 0.1s",
+                          }}
+                          onMouseEnter={() => setActive(idx)}
+                        >
+                          <span style={{ fontSize: "1rem" }}>🍽️</span>
+                          <span style={{ flex: 1, fontWeight: 500, fontSize: "0.9rem", color: "var(--text)" }}>{r.name}</span>
+                          {r.area && <span style={{ fontSize: "0.78rem", color: "var(--muted)" }}>{r.area.name}</span>}
+                          <TypePill type="restaurant" />
                         </a>
                       );
                     })}
