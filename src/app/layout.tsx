@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { SearchBar } from "@/components/SearchBar";
-import { NavMore } from "@/components/NavMore";
+import { NavBar } from "@/components/NavBar";
 import { Footer } from "@/components/Footer";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kathmandu.im";
@@ -33,12 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <nav className="nav">
           <div className="nav__inner">
             <a href="/" className="nav__logo">kathmandu.im</a>
-            <div className="nav__links">
-              <a href="/hotels">Hotels</a>
-              <a href="/attractions">Attractions</a>
-              <NavMore />
-              <SearchBar />
-            </div>
+            <NavBar />
           </div>
         </nav>
         <main>{children}</main>

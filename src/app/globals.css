@@ -56,14 +56,57 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: var(--accent);
   letter-spacing: -0.03em;
 }
-.nav__links { display: flex; gap: 32px; align-items: center; }
+.nav__links { display: flex; gap: 28px; align-items: center; }
 .nav__links a {
   font-size: 0.875rem; font-weight: 500;
   color: var(--muted);
   transition: color 0.15s;
+  white-space: nowrap;
 }
 .nav__links a:hover { color: var(--text); }
 .nav__links a.active { color: var(--accent); }
+
+/* Mobile controls (search + hamburger) — hidden on desktop */
+.nav__mobile-controls { display: none; align-items: center; gap: 8px; }
+
+.nav__hamburger {
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px; border-radius: 8px;
+  background: none; border: none; cursor: pointer;
+  color: var(--text); transition: background 0.15s;
+}
+.nav__hamburger:hover { background: var(--bg); }
+
+/* Mobile backdrop */
+.nav__backdrop {
+  position: fixed; inset: 0; z-index: 150;
+  background: rgba(0,0,0,0.25);
+}
+
+/* Mobile drawer */
+.nav__drawer {
+  position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 160;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  padding: 8px 0 12px;
+}
+.nav__drawer-link {
+  display: flex; align-items: center; gap: 14px;
+  padding: 13px 24px;
+  font-size: 1rem; font-weight: 500; color: var(--text);
+  text-decoration: none;
+  transition: background 0.1s;
+}
+.nav__drawer-link:hover { background: var(--bg); }
+.nav__drawer-icon { font-size: 1.2rem; width: 28px; text-align: center; }
+
+/* Responsive: switch to hamburger below 680px */
+@media (max-width: 680px) {
+  .nav__links { display: none; }
+  .nav__mobile-controls { display: flex; }
+  body { overflow-x: hidden; }
+}
 
 /* ── Hero ── */
 .hero {

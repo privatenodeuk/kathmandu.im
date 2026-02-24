@@ -12,7 +12,7 @@ export interface MapPin {
   name: string;
   lat: number;
   lng: number;
-  kind: "hotel" | "attraction";
+  kind: "hotel" | "attraction" | "restaurant";
   subtype?: string; // stars (hotels) or listingType (attractions)
   tagline?: string | null;
   areaName?: string | null;
@@ -22,11 +22,12 @@ interface FullMapProps {
   pins: MapPin[];
 }
 
-type FilterKey = "all" | "hotels" | "temples" | "bars" | "museums" | "nature" | "unesco";
+type FilterKey = "all" | "hotels" | "restaurants" | "temples" | "bars" | "museums" | "nature" | "unesco";
 
 const FILTERS: { key: FilterKey; label: string }[] = [
   { key: "all", label: "All" },
   { key: "hotels", label: "Hotels" },
+  { key: "restaurants", label: "Restaurants" },
   { key: "temples", label: "Temples & Stupas" },
   { key: "bars", label: "Bars & Nightlife" },
   { key: "museums", label: "Museums" },
@@ -43,6 +44,7 @@ const UNESCO_SLUGS = [
 function matchesFilter(pin: MapPin, filter: FilterKey): boolean {
   if (filter === "all") return true;
   if (filter === "hotels") return pin.kind === "hotel";
+  if (filter === "restaurants") return pin.kind === "restaurant";
   const t = pin.subtype ?? "";
   if (filter === "temples") return ["TEMPLE", "STUPA", "MONASTERY"].includes(t);
   if (filter === "bars") return ["BAR", "ROOFTOP_BAR", "NIGHTLIFE"].includes(t);
@@ -54,6 +56,7 @@ function matchesFilter(pin: MapPin, filter: FilterKey): boolean {
 
 function markerColor(pin: MapPin): string {
   if (pin.kind === "hotel") return "#C87941";
+  if (pin.kind === "restaurant") return "#e11d48";
   const t = pin.subtype ?? "";
   if (["TEMPLE", "STUPA", "MONASTERY"].includes(t)) return "#3b82f6";
   if (["BAR", "ROOFTOP_BAR", "NIGHTLIFE"].includes(t)) return "#7c3aed";
@@ -66,6 +69,7 @@ function markerColor(pin: MapPin): string {
 
 function markerLabel(pin: MapPin): string {
   if (pin.kind === "hotel") return "H";
+  if (pin.kind === "restaurant") return "R";
   const t = pin.subtype ?? "";
   if (["TEMPLE", "STUPA", "MONASTERY"].includes(t)) return "T";
   if (["BAR", "ROOFTOP_BAR", "NIGHTLIFE"].includes(t)) return "B";
@@ -90,6 +94,7 @@ function makeDivIcon(pin: MapPin) {
 
 function typeLabel(pin: MapPin): string {
   if (pin.kind === "hotel") return `${pin.subtype ?? ""}★ Hotel`;
+  if (pin.kind === "restaurant") return pin.subtype ?? "Restaurant";
   return (pin.subtype ?? "OTHER").replace(/_/g, " ");
 }
 
@@ -246,7 +251,7 @@ export function FullMap({ pins }: FullMapProps) {
                       <div style={{ fontSize: "0.78rem", color: "#555", marginBottom: 8 }}>{pin.tagline}</div>
                     )}
                     <a
-                      href={`/${pin.kind === "hotel" ? "hotels" : "attractions"}/${pin.slug}`}
+                      href={`/${pin.kind === "hotel" ? "hotels" : pin.kind === "restaurant" ? "restaurants" : "attractions"}/${pin.slug}`}
                       style={{
                         fontSize: "0.78rem", color: "var(--accent)", fontWeight: 600,
                         textDecoration: "none",
